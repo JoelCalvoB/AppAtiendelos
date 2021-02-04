@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Transacciones del día
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-refresher (ionRefresh)="actualizando($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Notificacion cocina</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  background: #f3f3f3;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background: white;
+height: 30px;" ></h3>
+<ion-list>
+  <ion-item-sliding  *ngFor="let i of arreglo" (click) = "servido(i)">
+    <ion-item style="    border-radius: 40px;" [ngClass]="{amarillo:i.minutos_transcurridos>=3 && i.minutos_transcurridos<9,rojo:i.minutos_transcurridos>=9}">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/pedido.jpg">
+      </ion-avatar>
+      <h2><strong>Producto: </strong>{{i.producto}} {{i.categoria}} </h2>
+      <p><strong>Cantidad:</strong> {{i.cantidad}}</p>
+      <p><strong>Mesa:</strong> {{i.id_mesa}}</p>
+      <p><strong>Mesero:</strong> {{i.nombre}}</p>
+      <p ><strong>Observaciones: </strong></p>
+      <p style="color: brown">{{i.observaciones}} </p>
+    </ion-item>
+  </ion-item-sliding>
+</ion-list>
+</ion-content>

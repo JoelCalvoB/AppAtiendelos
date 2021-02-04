@@ -1,0 +1,164 @@
+page-cuentas-detalle {
+
+    .estilobotones button{
+        width: 25px;
+    }
+    .estilobotones input{
+     width: 30px;
+    }
+    .personal{
+    
+     width: 100%;
+    }
+    .estilobotones p{
+     width: 100%;
+     text-align: center;
+    }
+    
+    ion-segment {
+        display: block;
+        white-space: nowrap;
+        font-size: 0;
+        overflow: auto;
+    
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    
+        ion-segment-button.segment-button {
+            display: inline-block;
+            min-width: 50%;
+            width: auto;
+        }
+    }
+    ion-toolbar {
+      padding: 0px 4px !important;
+      min-height: 43px !important;
+    }
+    
+    .toolbar-ios ion-title {
+      padding: 0 0px 1px;
+    }
+    .slide-zoom{
+    
+        height: 100%;
+        width: 100%;
+    }
+    
+    .letras{
+    
+        font-size: 15px;
+    }
+    
+    [cards] {
+        .grid-full ion-col {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 5px 0;
+        }
+        .row {
+            padding: 0 12px;
+        }
+        .col {
+            padding: 5px 0;
+        }
+        .card {
+            margin: 0 5px;
+            width: calc(100% - 10px);
+            padding: 14px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+            border-radius: 4px;
+            h1 {
+                font-weight: 400;
+                font-size: 12;
+                font-size: 3.5rem;
+            }
+            p {
+                font-weight: 100;
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .divs{
+        background: white;
+        text-align: center;
+        color:#013b6d;
+        border-radius: 10%;
+        width: 90%;
+      }
+       .observaciones{
+        background: rgb(255, 194, 137);
+      }
+  
+      .divs img{
+          border-radius: 50%;
+          
+          height: 50%;
+          margin-top: 3px;
+          height: 70px;
+        }
+        .fondo{
+
+            background: #f3f3f3;
+        }
+
+        .estiloBoton{
+            width: 40px;
+            background: white;
+            color: #ff3a52;
+            border: 0;
+            font-size: large;
+        }
+        .letras{
+
+            font-size: 15px;
+        }
+
+        .letra{
+
+            color: #ff3a52;
+        }
+
+     
+       
+
+        .animar{
+            animation: deslizar1 .5s ease-in
+        }
+
+
+        @keyframes deslizar1 {
+            0%{
+                transform: scale(0.7)
+            }
+            100%{
+             transform: scale(1)
+         }
+        }
+
+        .animaropciones{
+            animation: deslizar2 .7s ease-in
+        }
+
+
+        @keyframes deslizar2 {
+            0%{
+                transform: translateX(-500)
+            }
+            100%{
+             
+         }
+        }
+
+
+     .displa{
+         display: flex !important;
+     }   
+
+     .verdenuevo{
+        background: #daffe5;
+     }
+}

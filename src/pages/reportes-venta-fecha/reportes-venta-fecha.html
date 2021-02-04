@@ -1,0 +1,63 @@
+<ion-header *ngIf="!esmodal">
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      {{nombrereporte}}
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-header *ngIf="esmodal">
+  <ion-navbar color="primary">
+    <ion-title>Visualizar reporte</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Seleccionar fecha</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background:  #f3f3f3;
+height: 30px;" ></h3>
+  <ion-item>
+  <ion-label color="primary" fixed>Fecha inicial</ion-label>
+  <ion-input [(ngModel)] = "f1" type="date" placeholder="Fecha inicial"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label color="primary" fixed>Fecha Final</ion-label>
+  <ion-input  [(ngModel)] = "f2" type="date" placeholder="Fecha final"></ion-input>
+</ion-item>
+<button [disabled]="f1 == undefined || f2 == undefined" class="boton1" ion-button block type="button" (click)="reporte();">
+  Generar reporte</button>
+  
+
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Mesas desocupadas</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="fondo">
+  <ion-item *ngIf="!desabilitar && !unircuentas" class="unir">
+    <ion-label style="text-align: end">Unir mesas</ion-label>
+    <ion-toggle [(ngModel)]="unir" (ionChange)="toogle()"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="unircuentas">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h4 style="    text-align: center;
+            font-size: xx-large;
+            font-weight: 700;
+            color: #055b98;">Mesa seleccionada</h4>
+          <div class="divs2">
+            <img *ngIf="mesa.id_mesa != 0" src="../../assets/icon/mesaicon.PNG" alt="">
+            <img *ngIf="mesa.id_mesa == 0" src="../../assets/icon/run.png" alt="">
+            <h5 style="    font-weight: bolder;
+            font-size: large"> {{mesa.nombre}}</h5>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <h3 style="text-align: center" *ngIf="!unircuentas">Seleccionar mesa</h3>
+  <h3 style="text-align: center" *ngIf="unircuentas">Unir cuenta con:</h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of arreglo;let indice = index" col-4 col-sm-3 col-md-2 col-lg-2 col-xl-2>
+        <div class="divs" [ngClass]="{'ocupado':item.colorear,'marcando':item.clase}" (dblclick)="dobleClick()" (click)="marcar(indice)">
+          <img *ngIf="item.id_mesa != 0" src="../../assets/icon/mesaicon.PNG" alt="">
+          <img *ngIf="item.id_mesa == 0" src="../../assets/icon/run.png" alt="">
+          <h5 *ngIf="!unircuentas && !visualizaMesas">Mesa: {{item.id_mesa}}</h5>
+          <h5 *ngIf="unircuentas || visualizaMesas">{{item.nombre}}</h5>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+    <button *ngIf="!unircuentas" (click)="agregarMesa();" ion-button icon-only color="primary" style="width: 80%;" [disabled]="(indice == -1)">
+      Seleccionar mesa
+    </button>
+    <button *ngIf="unircuentas" (click)="unircuentasMetodos();" ion-button icon-only color="primary" style="width: 80%;" [disabled]="(indice == -1)">
+      Unir cuentas
+    </button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Seleccionar submenu</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <ion-item-group>
+    <ion-list>
+      <ion-item *ngFor="let item of arreglo">
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/menuicon.jpg">
+        </ion-avatar>
+        <ion-label>{{item.nombre}}</ion-label>
+        <ion-toggle [(ngModel)]="item.activo"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+
+    <ion-list radio-group  [(ngModel)]="relationship">
+      <ion-item *ngFor="let item of arreglo;let indice=index">
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/radioicon.jpg">
+        </ion-avatar>
+        <ion-label>{{item.nombre}}</ion-label>
+        <ion-radio [value]="indice+1" ></ion-radio>
+      </ion-item>
+    </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click)="guardarCambios();" ion-button icon-only color="light" style="width: 80%;">
+      Guardar cambios
+    </button>
+  </ion-toolbar>
+</ion-footer>

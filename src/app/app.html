@@ -1,0 +1,80 @@
+<ion-menu id="menu-dark" [content]="content" *ngIf="activaMenu()">
+    <ion-header class="sidemenuHeader">
+      
+    </ion-header>
+
+
+    <ion-content class="menu" style="background: rgb(0, 29, 46);" >
+        <ion-list>
+            <ion-item (click)="openPage(inicio)" *ngIf="activaInicio()">
+              <ion-avatar item-start>
+                <img src="../assets/icon/home.png">
+              </ion-avatar>
+              <h2>Inicio</h2>
+            </ion-item>
+            <ion-item (click)="openPage(gestionusuarios)" *ngIf="activaGestionUsuarios()">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/usuario.jpg">
+                </ion-avatar>
+                <h2>Gestion de usuarios</h2>
+              </ion-item>
+              <ion-item (click)="openPage(sucursales)" *ngIf="activaSucursales()">
+                <ion-avatar item-start>
+                  <img src="../assets/imgs/sucursal.png">
+                </ion-avatar>
+                <h2>Sucursales</h2>
+              </ion-item>
+              <ion-item (click)="openPage(mesas)" *ngIf="activaMesas()">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/mesasseparadas.PNG">
+                </ion-avatar>
+                <h2>Mesas</h2>
+              </ion-item>
+              <ion-item (click)="openPage(caja)" *ngIf="activaCaja()">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/corteicon.png">
+                </ion-avatar>
+                <h2>Caja</h2>
+              </ion-item>
+              <ion-item (click)="openPage(productos)" *ngIf="activaProductos()">
+                <ion-avatar item-start>
+                  <img src="../assets/imgs/foodicon.png">
+                </ion-avatar>
+                <h2>Productos</h2>
+              </ion-item>
+              <ion-item (click)="openPage(historial)" *ngIf="activaHistorial()">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/historico.PNG">
+                </ion-avatar>
+                <h2>Historial</h2>
+              </ion-item>
+              <ion-item (click)="openPage(reportes)" *ngIf="activaReportes()">
+                <ion-avatar item-start>
+                  <img src="../assets/imgs/reportes.PNG">
+                </ion-avatar>
+                <h2>Reportes</h2>
+              </ion-item>
+              <ion-item (click)="openPage(inventario)" *ngIf="activaInventario()">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/reporteinventario.png">
+                </ion-avatar>
+                <h2>Inventario</h2>
+              </ion-item>
+              <ion-item (click)="openPage(configuracion)" *ngIf="activaConfiguracion()">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/setting.png">
+                </ion-avatar>
+                <h2>Configuracion</h2>
+              </ion-item>
+              <ion-item (click)="openPage(ayuda)">
+                <ion-avatar item-start>
+                  <img src="../assets/icon/pregunta.png">
+                </ion-avatar>
+                <h2>Ayuda</h2>
+              </ion-item>
+          </ion-list>
+</ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content></ion-nav>
+<ion-nav [root]="rootPage"></ion-nav>

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Corte de inventario</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/success.png">
+        </ion-avatar>
+        <h2>
+          <strong>Fecha corte:</strong> {{fecha}}</h2>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/success.png">
+        </ion-avatar>
+        <h2>
+          <strong>{{nombre_bodega}}</strong>
+        </h2>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/success.png">
+        </ion-avatar>
+        <h2>
+          <strong>Inventario:</strong> {{descripcion}} </h2>
+      </ion-item>
+      <ion-item>
+          <ion-avatar item-start>
+              <img src="../../assets/icon/lapiz.png">
+            </ion-avatar>
+        <ion-label stacked>Cantidad real:</ion-label>
+        <ion-input  #numero type="number" value = "0"  placeholder="Insertar la cantidad contada"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-avatar item-start>
+              <img src="../../assets/icon/success.png">
+            </ion-avatar>
+        <ion-label stacked>Cantidad del programa:</ion-label>
+        <ion-input style="font-weight: bold;" [value]="total" disabled type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-avatar item-start>
+              <img src="../../assets/icon/success.png">
+            </ion-avatar>
+        <ion-label stacked>Diferencia:</ion-label>
+        <ion-input style="font-weight: bold;" disabled type="text" [value]="total - numero.value" ></ion-input>
+      </ion-item>
+    </ion-list>
+    <div>
+      <button ion-button block [disabled]="!numero.value" (click)="finalizar(numero.value)">Finalizar</button>
+    </div>
+  </form>
+
+
+</ion-content>

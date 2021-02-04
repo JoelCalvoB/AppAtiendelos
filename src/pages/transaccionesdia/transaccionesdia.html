@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Transacciones del día
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-refresher (ionRefresh)="actualizandoTransacciones($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Transacciones del día</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  background: #f3f3f3;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background: white;
+height: 30px;" ></h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of arreglo;let indice = index" col-4 col-sm-3 col-md-2 col-lg-2 col-xl-2>
+        <div class="divs" [ngClass]="{'ocupado':item.colorear,'marcando':item.clase}" (click)="marcar(indice,item)">
+          <img *ngIf="item.cancelado == false" src="../../assets/icon/cobrado.png" alt="">
+          <img *ngIf="item.cancelado == true" src="../../assets/icon/cancelar.png" alt="">
+          <strong *ngIf="item.cancelado == false" style="color: rgb(77, 134, 114)">Cobrado</strong>
+          <strong *ngIf="item.cancelado == true" style="color: rgb(255, 78, 78)">Cancelado</strong>
+          <h5>{{item.nombre}}</h5>
+          <p><strong>Folio:</strong> {{item.id_folio}}</p>
+          <p><strong>Total: </strong>{{item.total + item.iva | currency}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

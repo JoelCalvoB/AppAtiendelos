@@ -1,0 +1,248 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Resumen de la cuenta</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-content>
+    <ion-grid>
+      <ion-row class="cabecera">
+        <ion-col col-3>
+          <STRONG>Nombre</STRONG>
+        </ion-col>
+        <ion-col col-3>
+          <STRONG>Cantidad</STRONG>
+        </ion-col>
+        <ion-col col-3>
+          <STRONG>C/U</STRONG>
+        </ion-col>
+        <ion-col class="izquierda">
+          <STRONG>Total</STRONG>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let i of arreglo">
+        <ion-col col-3>
+          {{i.nombre}}
+        </ion-col>
+        <ion-col col-3>
+          {{i.cantidad}}
+        </ion-col>
+        <ion-col col-3>
+          {{i.unitario | currency}}
+        </ion-col>
+        <ion-col class="derecha2">
+          {{i.precio_total | currency}}
+        </ion-col>
+      </ion-row>
+      <div *ngIf="iva == false && ivarecupera == false ">
+        <ion-row class="cabecera">
+          <ion-col col-8 class="derecha">
+            <strong>Total: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{total | currency}}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia != 0">
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <strong style="color: black">Descuento al ticket por {{descontar_ticket | currency}}</strong>
+            <p><strong>Total a pagar: {{total - descontar_ticket | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <strong style="color: black">Descuento al ticket por {{descontar_ticket}}%</strong>
+            <p><strong>Total a pagar: {{(total - (total * descontar_ticket)/100) | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <strong style="color: black">Ticket por cortesia {{0 | currency}}</strong>
+            <p><strong>Total a pagar: {{0 | currency}}</strong></p>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div *ngIf="iva == true">
+        <ion-row class="cabecera">
+          <ion-col col-8 class="derecha">
+            <strong>Subtotal: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{total | currency}}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia != 0">
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <strong style="color: black">Descuento al ticket por {{descontar_ticket | currency}}</strong>
+            <p><strong>Subtotal a pagar: {{total - descontar_ticket | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <strong style="color: black">Descuento al ticket por {{descontar_ticket}}%</strong>
+            <p><strong>Subtotal a pagar: {{(total - (total * descontar_ticket)/100) | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <strong style="color: black">Ticket por cortesia {{0 | currency}}</strong>
+            <p><strong>Subtotal a pagar: {{0 | currency}}</strong></p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia != 0">
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <p><strong>IVA: {{((total - descontar_ticket)*16)/100 | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <p><strong>IVA: {{((total - (total * descontar_ticket)/100)*16)/100 | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <p><strong>IVA: {{0 | currency}}</strong></p>
+          </ion-col>
+
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <p><strong>Total: {{(((total - descontar_ticket)*16)/100)+(total - descontar_ticket) | currency}}</strong>
+            </p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <p><strong>Total:
+                {{(((total - (total * descontar_ticket)/100)*16)/100)+(total - (total * descontar_ticket)/100) | currency}}</strong>
+            </p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <p><strong>Total: {{0 | currency}}</strong></p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia == 0 || cortesia == undefined">
+          <ion-col col-8 class="derecha">
+            <strong>IVA: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{(total*16)/100 | currency}}</strong>
+          </ion-col>
+          <ion-col col-8 class="derecha">
+            <strong>Total: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{((total*16)/100)+total | currency}}</strong>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div *ngIf="ivarecupera == true">
+        <ion-row class="cabecera">
+          <ion-col col-8 class="derecha">
+            <strong>Subtotal: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{((total * 100)/116) | currency}}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia != 0">
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <strong style="color: black">Descuento al ticket por {{descontar_ticket | currency}}</strong>
+            <p><strong>Subtotal a pagar: {{((total * 100)/116) - descontar_ticket | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <strong style="color: black">Descuento al ticket por {{descontar_ticket}}%</strong>
+            <p><strong>Subtotal a pagar: {{(((total * 100)/116) - (((total * 100)/116) * descontar_ticket)/100) | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <strong style="color: black">Ticket por cortesia {{0 | currency}}</strong>
+            <p><strong>Subtotal a pagar: {{0 | currency}}</strong></p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia != 0">
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <p><strong>IVA: {{((total - descontar_ticket)*16)/100 | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <p><strong>IVA: {{((total - (total * descontar_ticket)/100)*16)/100 | currency}}</strong></p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <p><strong>IVA: {{0 | currency}}</strong></p>
+          </ion-col>
+
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 1">
+            <p><strong>Total: {{(((total - descontar_ticket)*16)/100)+(total - descontar_ticket) | currency}}</strong>
+            </p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 2">
+            <p><strong>Total:
+                {{(((total - (total * descontar_ticket)/100)*16)/100)+(total - (total * descontar_ticket)/100) | currency}}</strong>
+            </p>
+          </ion-col>
+          <ion-col col-12 class="derecha" *ngIf="cortesia == 3">
+            <p><strong>Total: {{0 | currency}}</strong></p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="cabecera" *ngIf="cortesia == 0 || cortesia == undefined">
+          <ion-col col-8 class="derecha">
+            <strong>IVA: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{total-((total * 100)/116) | currency}}</strong>
+          </ion-col>
+          <ion-col col-8 class="derecha">
+            <strong>Total: </strong>
+          </ion-col>
+          <ion-col class="derecha">
+            <strong>{{total | currency}}</strong>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-grid>
+
+
+    <ion-grid *ngIf="promociones.length != 0">
+      <ion-row class="cabecera" style="font-weight: bold;">
+        APLICANDO PROMOCIONES
+      </ion-row>
+      <div *ngFor="let i of promociones">
+        <ion-row style="font-weight: bolder;">
+          <ion-col col-3>
+            {{i.nombre}}
+          </ion-col>
+          <ion-col col-3>
+            {{i.totalPromocion}}
+          </ion-col>
+          <ion-col col-3>
+            {{i.precio | currency}}
+          </ion-col>
+          <ion-col class="derecha2">
+            {{i.totalPromocion * i.precio | currency}}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let j of i.productos">
+          <ion-col col-3>
+            {{j.nombre}}
+          </ion-col>
+          <ion-col col-3>
+            {{j.cantidad}}
+          </ion-col>
+          <ion-col col-3>
+
+          </ion-col>
+          <ion-col class="derecha2" style="color: darkred;
+          font-weight: bolder;">
+            {{(-1)*j.total | currency}}
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row class="cabecera">
+        <ion-col col-8 class="derecha">
+          <strong>Total a pagar: </strong>
+        </ion-col>
+        <ion-col class="derecha">
+          <strong>{{totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+
+  <ion-footer>
+    <ion-toolbar color="gris" style="text-align: center">
+      <button (click)="cobrar();" ion-button icon-only color="primary" style="width: 80%;">
+        Cobrar
+      </button>
+    </ion-toolbar>
+  </ion-footer>

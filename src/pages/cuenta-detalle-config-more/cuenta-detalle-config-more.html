@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color="navegador">
+    <ion-title>Seleccionar</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/icon/descuentos.png">
+      </ion-avatar>
+      <button ion-item (click)="cerrar(1)">Aplicar descuento</button>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/roles.png">
+      </ion-avatar>
+      <button ion-item (click)="cerrar(2)">Cambiar mesero</button>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/icon/mesaicon1.jpg">
+      </ion-avatar>
+      <button ion-item (click)="cerrar(3)">Cambiar mesa</button>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/icon/multipago.png">
+      </ion-avatar>
+      <button ion-item (click)="cerrar(4)">Cuentas separadas</button>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/icon/mesasseparadas.PNG">
+      </ion-avatar>
+      <button ion-item (click)="cerrar(5)">Separar mesas</button>
+    </ion-item>
+    <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/unir.png">
+        </ion-avatar>
+        <button ion-item (click)="cerrar(6)">Unir cuentas</button>
+      </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,260 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Configuraciones
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Seleccionar las configuraciones correspondientes</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background: white;
+height: 30px;" ></h3>
+  <ion-item-group>
+    <ion-item-divider class="color" color="light">Sección inventarios</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Nombre del negocio:</ion-label>
+        <ion-input [(ngModel)] = "nombre" type="text" placeholder="Nombre del negocio" disabled></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider class="color" color="light">Sección cancelaciones</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/enlace.png">
+        </ion-avatar>
+        <h2>Contraseña Dinamica</h2>
+        <button class="botonespersonalizados" (click)="generarcancelados();" color="blue" ion-button item-end>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider class="color" color="light">Sección QR</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/enlace.png">
+        </ion-avatar>
+        <h2>Prueba Qr</h2>
+        <button class="botonespersonalizados" (click)="PruebQr();" color="blue" ion-button item-end>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  
+  <ion-item-group>
+    <ion-item-divider color="light">Tipo de impresora</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/wifi.png">
+        </ion-avatar>
+        <ion-label>Impresora wifi</ion-label>
+        <ion-toggle [(ngModel)]="esImpresoraWifi"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/bluetoot.png">
+        </ion-avatar>
+        <ion-label>Impresora bluetooth</ion-label>
+        <ion-toggle [(ngModel)]="esImpresoraBluetooth"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+  
+  <ion-item-group>
+    <ion-item-divider color="light">Conexiones</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/wifiicon.png">
+        </ion-avatar>
+        <h2>Configurar Wifi</h2>
+        <button class="botonespersonalizados" (click)="abrirpaginaWifi();" color="blue" ion-button item-end>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/bluetooth.png">
+        </ion-avatar>
+        <h2>Configurar bluetooth</h2>
+        <button class="botonespersonalizados" (click)="abrirpaginabluetooth();" color="blue" ion-button item-end>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Configuraciones Impresora</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/printer.png">
+        </ion-avatar>
+        <ion-label>Impresora autodesconectable</ion-label>
+        <ion-toggle [(ngModel)]="disconected"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/printer.png">
+        </ion-avatar>
+        <ion-label>Cocina/Barra una impresora</ion-label>
+        <ion-toggle [(ngModel)]="cocinabarra"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/printer.png">
+        </ion-avatar>
+        <ion-label>Mas Impresoras</ion-label>
+        <ion-toggle [(ngModel)]="varias"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/printer.png">
+        </ion-avatar>
+        <ion-label>Impresora 80mm</ion-label>
+        <ion-toggle [(ngModel)]="impresora80"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/cajeroslide.jpg">
+        </ion-avatar>
+        <ion-label>Impresora cajero</ion-label>
+        <ion-toggle [(ngModel)]="impresoraCajero"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/cocinaslide.png">
+        </ion-avatar>
+        <ion-label>Impresora cocina</ion-label>
+        <ion-toggle [(ngModel)]="impresoraCocina"></ion-toggle>
+      </ion-item>
+      <ion-item>
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/cocinaslide.png">
+          </ion-avatar>
+          <ion-label>Impresora cocina fria</ion-label>
+          <ion-toggle [(ngModel)]="impresoraCocinafria"></ion-toggle>
+        </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/barraslide.png">
+        </ion-avatar>
+        <ion-label>Impresora barra</ion-label>
+        <ion-toggle [(ngModel)]="impresoraBarra"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Configuraciones generales</ion-item-divider>
+    <ion-list>
+      <ion-item *ngIf="!isFree">
+        <ion-avatar item-start>
+          <img src="../../assets/icon/reloadicon.jpg">
+        </ion-avatar>
+        <h2>Recargar catalogos</h2>
+        <ion-icon (click)="recargar()" name="refresh" item-end *ngIf="reloadicon == false"></ion-icon>
+        <ion-spinner name="bubbles" item-end *ngIf="reloadicon == true"></ion-spinner>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/pagosicon.PNG">
+        </ion-avatar>
+        <ion-label>No enviar orden cocina</ion-label>
+        <ion-toggle [(ngModel)]="enviarCocina"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/pagosicon.PNG">
+        </ion-avatar>
+        <ion-label>No enviar orden a barra</ion-label>
+        <ion-toggle [(ngModel)]="enviarBarra"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/pagosicon.PNG">
+        </ion-avatar>
+        <ion-label>Calcula IVA</ion-label>
+        <ion-toggle [(ngModel)]="iva"></ion-toggle>
+      </ion-item>
+      <ion-item>
+          <ion-avatar item-start>
+            <img src="../../assets/icon/pagosicon.PNG">
+          </ion-avatar>
+          <ion-label>Recupera IVA</ion-label>
+          <ion-toggle [(ngModel)]="ivarecupera"></ion-toggle>
+        </ion-item>
+    </ion-list>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Configuración idenpendiente</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/bluetoot.png">
+        </ion-avatar>
+        <ion-label>Configuración unica de dispositivo</ion-label>
+        <ion-toggle [(ngModel)]="configuracionunica"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">Configuraciones especiales</ion-item-divider>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/bluetoot.png">
+        </ion-avatar>
+        <ion-label>Venta offline</ion-label>
+        <ion-toggle [(ngModel)]="semionline"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click)="guardarCambios();" ion-button icon-only color="light" style="width: 80%;">
+      Guardar cambios
+    </button>
+  </ion-toolbar>
+</ion-footer>

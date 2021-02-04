@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-navbar color="paymant">
+    <ion-title style="text-align: center;">Total a pagar</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content style="background: linear-gradient(#cfcfcf, #ffffff);">
+
+  <ion-list no-lines>
+
+    <ion-item style="font-size: xxx-large;
+    color: white;
+    background: transparent;">
+      <ion-label style="text-align: center;">{{cantidad_pagar | currency}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list style="margin-left: 10%;margin-right: 10%;">
+    <ion-item style="background: linear-gradient(#ffffff, #ffffff);
+    font-size: xx-large;
+    /* margin-left: 15%; */
+    text-align: center;
+    margin-right: 100px;">
+      <ion-input [disabled]="tarjeta()" #input1 style="text-align: center;" type="number" [(ngModel)]="cantidad"
+        placeholder="Ingresar monto"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group style="margin-left: 15px;
+  margin-right: 15px;" no-lines color="paymant" [(ngModel)]="valor" (click)="tarjeta()">
+
+
+
+    <ion-item>
+      <ion-icon item-start name="cash"></ion-icon>
+      <ion-label>Efectivo</ion-label>
+      <ion-radio value="E" checked="true"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="card"></ion-icon>
+      <ion-label>Tarjeta credito / debito</ion-label>
+      <ion-radio value="T"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="star-half"></ion-icon>
+
+      <ion-label>Mitad tarjeta y efectivo</ion-label>
+      <ion-radio value="M"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="thumbs-up"></ion-icon>
+      <ion-label>Otros</ion-label>
+      <ion-radio value="O"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-item style="text-align: center;">
+
+      <ion-label style="    text-align: center;
+      font-size: xx-large;
+      color: darkslategrey;
+      font-weight: 500;">PROPINA</ion-label>
+
+    </ion-item>
+
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <div class="divs" [ngClass]="{'marcando':efectivo}"
+          (click)="efectivometodo()">
+          <img src="../../assets/icon/efectivo.png" alt="">
+          <h5>Efectivo</h5>
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="divs" [ngClass]="{'marcando':tarjetadcredito}"
+          (click)="tarjetaaMetodo()">
+          <img src="../../assets/icon/tarjeta.png" alt="">
+          <h5>Tarjeta</h5>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-list  radio-group style="margin-left: 10%;margin-right: 10%;"  [(ngModel)]="tipopropina">
+    <ion-item *ngIf = "tarjetadcredito" >
+      <ion-icon item-start >%</ion-icon>
+
+      <ion-label>Porcentaje</ion-label>
+      <ion-radio value="P" checked= "true"></ion-radio>
+    </ion-item>
+    <ion-item *ngIf = "tarjetadcredito">
+      <ion-icon item-start name="logo-usd"></ion-icon>
+      <ion-label>Efectivo</ion-label>
+      <ion-radio value="E"></ion-radio>
+    </ion-item>
+    <ion-item *ngIf = " efectivo || tarjetadcredito" style="background: linear-gradient(#ffffff, #ffffff);
+    font-size: xx-large;
+    /* margin-left: 15%; */
+    text-align: center;
+    margin-right: 100px;">
+      <ion-input  #efectivo style="text-align: center;" type="number" [(ngModel)]="propina"
+        placeholder="Ingresar propina"></ion-input>
+    </ion-item>
+    
+  </ion-list>
+  
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="light" style="text-align: center">
+    <button [disabled]="verificar()" (click)="cobrar(input1);" ion-button icon-only color="success" style="width: 80%;">
+      Efectuar pago
+    </button>
+  </ion-toolbar>
+</ion-footer>

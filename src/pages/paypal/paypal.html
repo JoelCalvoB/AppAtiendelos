@@ -1,0 +1,30 @@
+
+
+
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Configuración Pay Pal 
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+
+  <div>
+    <div> <ion-label>INSERTE EL IMPORTE TOTAL A COBRAR</ion-label></div>
+    <div>     <ion-input type="number" min="1" step="any" [(ngModel)]="monto_pago"></ion-input>    </div>
+    <button color ="default" ion-button full (click)="comprar()">CONTINUAR</button>
+</div>
+
+</ion-content>

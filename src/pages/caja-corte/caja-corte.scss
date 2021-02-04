@@ -1,0 +1,28 @@
+page-caja-corte {
+    .fondo{
+
+        background: #f3f3f3;
+    }
+
+    .fondototal ion-col ion-item{
+        background: lightcyan;
+    }
+    .fondototal2 ion-col ion-item{
+        background: bisque;
+    }
+    .totales ion-col ion-item{
+        text-align: right;
+    color: #025dad;
+    font-size: large;
+    
+    }
+    .totales2 ion-col ion-item{
+        text-align: center;
+    color: #025dad;
+    font-size: large;
+    }
+
+    .negritas{
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,122 @@
+page-bar {
+    .fondo{
+
+        background: #f3f3f3;
+    }
+    .background{
+        background-image: url('../../assets/imgs/fondo2.PNG');
+        height: 30%;
+        background-size: cover;
+      }
+
+      .amarillo{
+        background: lightgoldenrodyellow;
+     }
+     .rojo{
+        background: indianred;
+        color:white;
+     }
+     .rojo p{
+        
+        color:rgba(255, 255, 255, 0.747);
+     }
+
+
+            
+    .fondo{
+
+        background: white;
+    }
+
+    .divs{
+      background: white;
+      text-align: center;
+      color:gray;
+      border-radius: 10%;
+      width: 90%;
+    }
+
+    .divs img{
+        
+        height: 50%;
+        margin-top: 3px;
+        height: 70px;
+      }
+
+  h3{
+      color:rgb(138, 0, 30),
+  }
+  .background{
+    background-image: url('../../assets/imgs/fondo1.jpg');
+    height: 30%;
+    background-size: cover;
+    
+  }
+
+
+  .menuemergente{
+      position: fixed;
+      visibility: visible;
+      bottom: 0px;
+      animation: aparecer 1s;
+  }
+  .apareceropciones{
+    
+      animation: aparecer 1s;
+  }
+
+  .cabeceramenu{
+      animation: deslizar 1s;
+      background: #ff3a52;height: 20%;    background-image: linear-gradient(#ff3a52, #861c29);
+  }
+  .normal{
+    background: #ff3a52;height: 20%;    background-image: linear-gradient(#ff3a52, #861c29);
+  }
+
+  @keyframes deslizar {
+    from {
+         height: 20%;
+    }
+    to{
+         height: 20%;
+    }
+}
+
+  .menuemergente button{
+    float: right;
+    width: 60px;
+}
+.desapareceropciones{
+    opacity: 0;
+    display: none;
+}
+
+  @keyframes aparecer {
+       from {
+           opacity: 0;
+       }
+       to{
+           opacity: 0.8;
+       }
+
+       
+  }
+
+ 
+
+  .desaparecermenu{
+    visibility: hidden;
+  }
+
+  .marcando{
+      background: #fff46f;
+  }
+
+  .ocupado{
+      background:#6fffa3;
+  }
+
+.menuseleccionado{
+    background: #fdc049;
+}
+}

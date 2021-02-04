@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="!esVenta">{{objticket.nombre}} - Comensal {{comensalSeleccionado}}</ion-title>
+    <ion-title *ngIf="esVenta">Subcategoria</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo" padding>
+  <ion-row>
+    <ion-col *ngFor="let item of arreglo" col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1>
+      <div class="divs" (click)="seleccionar(item)">
+        <img src="../../assets/icon/catalogo.png" alt="">
+        <h5>{{item.nombre}}</h5>
+      </div>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click)="verCuenta();" ion-button icon-only color="light" style="width: 80%;">
+      Ver cuenta
+    </button>
+  </ion-toolbar>
+</ion-footer>

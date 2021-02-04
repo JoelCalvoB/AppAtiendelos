@@ -1,0 +1,38 @@
+<!--
+  Generated template for the SucursalesAddPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Gestión de sucursales
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="car" item-start></ion-icon>
+        <ion-label stacked>Nombre:</ion-label>
+        <ion-input formControlName="nombre" type="text" placeholder="Nombre de sucursal"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="car" item-start></ion-icon>
+        <ion-label stacked>Dirección:</ion-label>
+        <ion-input formControlName="direccion" type="text" placeholder="Dirección"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!myForm.valid">{{boton}}</button>
+    </div>
+  </form>
+</ion-content>

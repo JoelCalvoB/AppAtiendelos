@@ -1,0 +1,42 @@
+<ion-header >
+  <ion-navbar color="navegador">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Sub categorias
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="actualizando($event)" >
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <ion-list>
+    <ion-list-header color="light">
+      <strong>Categoría</strong>
+      <ion-icon item-end name="car"></ion-icon>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let i of arreglo">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/categoriasicon.png">
+        </ion-avatar>
+      <h2><strong>Nombre:</strong> {{i.nombre}}</h2>
+      <button  (click)="abrirproductos(i);" color="blue" ion-button item-end>
+        <ion-icon  name="arrow-forward"></ion-icon>
+      </button>
+      </ion-item>
+    </ion-item-sliding>
+
+
+  </ion-list>
+</ion-content>

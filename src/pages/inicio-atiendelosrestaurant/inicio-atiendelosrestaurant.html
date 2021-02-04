@@ -1,0 +1,200 @@
+<ion-content>
+  <ion-slides pager>
+
+    <ion-slide style="background-color: rgb(245, 245, 245)" id="slide1">
+      <img src="../../assets/imgs/logoresutaurante.png" alt="">
+      <h1 style=" font-size: x-large;
+        color: #e6364b;">Bienvenido a Atiendelos Restaurant</h1>
+
+      <h2 style="color: #004094; font-size: medium;">Más que una App de administación Restaurantera... La solución a sus problemas</h2>
+      <img src="../../assets/imgs/restauranteslide1.PNG" alt="">
+    </ion-slide>
+    <ion-slide style="background-color: rgb(245, 245, 245)" id="slide1">
+      
+      <h1 style=" font-size: x-large;
+      color: #e6364b;">Seleccionar opción</h1>
+
+      <div style="width: 50%;margin: auto;">
+        <div [ngClass]="{'colorear':free == true}" (click)="ClickFree()">
+          <img style="width: 100px" src="../../assets/icon/gratis.png" alt="">
+          <p>
+            Libre
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':paga == true}" (click)="clickPaga()">
+          <img style="width: 100px;height: 80px;" src="../../assets/icon/salario.png" alt="">
+          <p>
+            Licencia
+          </p>
+        </div>
+      </div>
+
+    </ion-slide>
+    <ion-slide *ngIf="paga" style="background-color: rgb(245, 245, 245)" id="slide1">
+      <img src="../../assets/imgs/logoresutaurante.png" alt="">
+      <h1 style=" font-size: x-large;
+          color: #e6364b;">Insertar serial del programa</h1>
+
+
+      <input type="text" [(ngModel)]="usuario">
+      <br>-
+      <br>
+      <input type="text" [(ngModel)]="password">
+      <div>
+        <button ion-button color="light" (click)="validar()" *ngIf="antes == true">Validar
+
+        </button>
+
+        <ion-spinner name="bubbles" item-end *ngIf="reloadicon == true"></ion-spinner>
+        <button style="    background: #2a9c2e;
+        color: white;" ion-button color="light" (click)="validar()" *ngIf="verificado == true">  <ion-icon name="checkmark"></ion-icon>
+
+
+        </button>
+      </div>
+    </ion-slide>
+    <ion-slide *ngIf="free" style="background-color: rgb(245, 245, 245)">
+      <h2 style="color:#0e539c">Usuario y sucursal por defecto (FREE)</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col  col-6>
+            <div class="divs" class="marcando">
+              <img style="width: 70px;" src="../../assets/icon/cliente.png" alt="">
+              <h5>Admin</h5>
+              <h3>Contraseña 1111</h3>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col  col-6>
+            <div class="divs" class="marcando">
+              <img style="width: 70px;" src="../../assets/imgs/sucursal.png" alt="">
+              <h5>Sucursal 1</h5>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide *ngIf="free" style="background-color: rgb(245, 245, 245)">
+      <img style="width:40%;" src="../../assets/imgs/gracias.jpg" alt="">
+      <h2 style="    color: #00668f;
+          font-size: x-large;">Gracias por probar atiendelos FREE</h2>
+
+
+      <button ion-button color="primary" (click)="continuarFree()" clear >SALTAR
+
+      </button>
+    </ion-slide>
+
+    <ion-slide *ngIf="habilitar" style="background-color: rgb(245, 245, 245)" id="slide2">
+      <h2 style="color:#0e539c">Seleccionar sucursal</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of sucursales;let indice = index" col-6>
+            <div class="divs" [ngClass]="{'marcando':item.colorear}"
+              (click)="marcarSucursal(indice)">
+              <img src="../../assets/imgs/sucursal.png" alt="">
+              <h5>{{item.nombre}}</h5>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide *ngIf="habilitar" style="background-color: rgb(245, 245, 245)" id="slide2">
+      <h2 style="color:#0e539c">Configuraciones de impresoras</h2>
+      <div style="width: 50%;margin: auto;">
+        <div [ngClass]="{'colorear':wifi == true}" (click)="clickwifi()">
+          <img style="width: 100px" src="../../assets/imgs/wifi.png" alt="">
+          <p>
+            Wifi
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':blue == true}" (click)="clickblue()">
+          <img style="width: 100px;height: 80px;" src="../../assets/imgs/bluetoot.png" alt="">
+          <p>
+            bluetooth
+          </p>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide  *ngIf="wifi == true && habilitar" style="background-color: rgb(245, 245, 245)">
+      <h2 style="color:#0e539c">Configuraciones de impresoras Wifi</h2>
+      <div style="width: 50%;margin: auto;">
+        <div [ngClass]="{'colorear':cajero == true}" (click)="clickCajeroWifi()">
+          <img style="width: 100px" src="../../assets/imgs/cajeroslide.jpg" alt="">
+          <p>
+            Cajero
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':cocinaFria == true}" (click)="clickcocinaWifiFria()">
+          <img style="width: 100px;height: 80px;" src="../../assets/imgs/cocinaslide.png" alt="">
+          <p>
+            Cocina fria
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':cocina == true}" (click)="clickcocinaWifiCaliente()">
+          <img style="width: 100px;height: 80px;" src="../../assets/imgs/cocinaslide.png" alt="">
+          <p>
+            Cocina caliente
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':barra == true}" (click)="clickbarraWifi()">
+          <img style="width: 100px;height: 80px;" src="../../assets/imgs/barraslide.png" alt="">
+          <p>
+            Barra
+          </p>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide  *ngIf="blue == true && habilitar" style="background-color: rgb(245, 245, 245)">
+      <h2 style="color:#0e539c">Configuraciones de impresoras bluetooth</h2>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/printer.png">
+        </ion-avatar>
+        <ion-label>Impresora autodesconectable</ion-label>
+        <ion-toggle [(ngModel)]="disconected"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/printer.png">
+        </ion-avatar>
+        <ion-label>Cocina/barra una impresora</ion-label>
+        <ion-toggle [(ngModel)]="cocinabarra"></ion-toggle>
+      </ion-item>
+      <div style="width: 50%;margin: auto;">
+        <div [ngClass]="{'colorear':cajero == true}" (click)="clickCajero()">
+          <img style="width: 100px" src="../../assets/imgs/cajeroslide.jpg" alt="">
+          <p>
+            Cajero
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':cocina == true}" (click)="clickcocina()">
+          <img style="width: 100px;height: 80px;" src="../../assets/imgs/cocinaslide.png" alt="">
+          <p>
+            Cocina
+          </p>
+        </div>
+        <div [ngClass]="{'colorear':barra == true}" (click)="clickbarra()">
+          <img style="width: 100px;height: 80px;" src="../../assets/imgs/barraslide.png" alt="">
+          <p>
+            Barra
+          </p>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide *ngIf="habilitar" style="background-color: rgb(245, 245, 245)">
+      <img style="width:40%;" src="../../assets/imgs/gracias.jpg" alt="">
+      <h2 style="    color: #00668f;
+          font-size: x-large;">Gracias por adquirir Atiendelos Restaurant</h2>
+
+
+      <button ion-button color="primary" (click)="continuar()" clear >SALTAR
+
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

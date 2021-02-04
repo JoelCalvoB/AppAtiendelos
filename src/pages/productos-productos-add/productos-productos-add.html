@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Gestión de Productos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Nombre:</ion-label>
+        <ion-input formControlName="nombre" type="text" placeholder="Nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Descripción:</ion-label>
+        <ion-input formControlName="descripcion" type="text" placeholder="Descripción"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Precio:</ion-label>
+        <ion-input formControlName="precio" type="number" placeholder="Precio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Seleccionar Categoría</ion-label>
+        <ion-select formControlName="categoria" multiple="false">
+          <ion-option *ngFor="let i of categoria" value="{{i.id}}">{{i.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Seleccionar tipo</ion-label>
+        <ion-select formControlName="tipobarra" multiple="false">
+          <ion-option value="1">Cocina</ion-option>
+          <ion-option value="2">Barra</ion-option>
+          <ion-option value="3">Cocina Fría</ion-option>
+          <ion-option value="4">Cocina & Barra</ion-option>
+          <ion-option value="0">No enviar</ion-option>
+        </ion-select>
+      </ion-item>
+     
+      <ion-item>
+        <ion-icon name="logo-youtube" item-start></ion-icon>
+        <ion-label stacked>Video youtube:</ion-label>
+        <ion-input formControlName="video" type="text" placeholder="Vídeo youtube" [(ngModel)]="video"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button (click)="agregarvideo()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-list>
+        <ion-list-header color="gris" style="text-align: center">
+           -- Sección menu desplegable --
+          </ion-list-header>
+        <ion-item *ngFor="let auxitem of objMenu">
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/menuicon.jpg">
+          </ion-avatar>
+          <h2><strong>{{auxitem.nombre}}</strong></h2>
+        </ion-item>
+    </ion-list>
+      <ion-item>
+        <ion-label style="TEXT-ALIGN: RIGHT; color: #ff3a52; font-weight: 500;">SUBMENU: </ion-label>
+        <button (click)="agregarSubmenu()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-label [ngClass] = "{'sinimagen':imagen=='','conimagen':imagen!='','sinimagen':imagen== undefined}">
+          {{texto}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <button item-end (click)="subirFoto()" style="width:10%" ion-button icon-only color="light" type="button">
+
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <button item-end (click)="galeria()" style="width:10%" ion-button icon-only color="light" type="button">
+          <ion-icon name="photos"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!myForm.valid">{{boton}}</button>
+    </div>
+  </form>
+</ion-content>

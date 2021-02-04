@@ -1,0 +1,50 @@
+<!--
+  Generated template for the CuentasVisualizacionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="white">
+    <ion-title style="text-align: center">CONSULTA MESAS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <label style="color: #f27b00;
+
+   
+  font-size: larger;" >Este apartado es de pura consulta, solo se podrá imprimir preticket y agregar ordenes a las mesas</label>
+
+
+  <ion-list>
+    <ion-item style="text-align: center;" *ngIf="cargadoicon == true">
+      <ion-spinner name="bubbles" ></ion-spinner>
+    </ion-item>
+    <ion-item-sliding *ngFor="let i of arreglo">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/catalogo1.jpg">
+        </ion-avatar>
+        <h3>
+            Mesa:
+        </h3>
+        <h1>
+          <strong>{{i.nombre}}</strong> </h1>
+          
+        
+      </ion-item>
+      <ion-item-options side="right">
+        <button color="light" ion-button (click)="preticketImprimir(i)">
+          <ion-icon name="brush"></ion-icon>Preticket
+        </button>
+        <button color="success" (click)="addOrden(i)" ion-button>
+          <ion-icon name="trash"></ion-icon>Orden
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar color="navegador">
+      <ion-title>Usuarios Activos
+      </ion-title>
+      <ion-buttons left>
+        <button (click)="salir()" ion-button icon-end icon-only>
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+<ion-content>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of arreglo;let indice = index" col-4 col-sm-3 col-md-2 col-lg-2 col-xl-2>
+            <div class="divs" [ngClass]="{'ocupado':item.colorear,'marcando':item.clase}" (click)="marcar(indice,item)">
+              <img src="../../assets/imgs/usuarios.png"
+                alt="">
+              <h5>{{item.login}}</h5>
+              <p>{{item.rol}}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar color="gris" style="text-align: center">
+      <button (click) = "seleccionar();" ion-button icon-only color="primary" style="width: 80%;" [disabled] = "btn">            
+        Seleccionar
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+  
+  

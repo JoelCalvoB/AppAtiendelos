@@ -1,0 +1,48 @@
+
+<ion-header>
+  <ion-navbar color="primary">  
+    <ion-title>
+      Inventario
+    </ion-title>
+    <ion-buttons left>
+        <button (click)="salir()" ion-button icon-end icon-only>
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+     
+      
+  </ion-navbar>
+  <ion-searchbar (ionInput)="getItems($event)" [(ngModel)]="letras"></ion-searchbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-item-sliding [ngClass] = "i.clase" *ngFor="let i of arreglo;let indice = index">
+        <ion-item>
+            <ion-label>{{i.descripcion}}</ion-label>
+          
+            <ion-checkbox [(ngModel)]="i.elegido" ></ion-checkbox>
+            <div item-end class="estilobotones"  *ngIf="i.elegido">
+                <button ion-button color="rojo" (click)="restar(indice);" icon-only>
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+                <input type="text" placeholder=" " [value]="getcantidad(indice)" disabled>
+                <button ion-button icon-only color="botones" (click)="sumar(indice);">
+                  <ion-icon name="add"></ion-icon>
+                </button>            
+              </div>
+              <strong style= "color:mediumseagreen " item-end >{{i.unidad_medida}}</strong> 
+    
+          </ion-item>
+        </ion-item-sliding>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+      <button (click) = "hecho();" ion-button icon-only color="primary" style="width: 40%;">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Transacciones del día
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Cátalogos</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  background: #f3f3f3;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background: white;
+height: 30px;"></h3>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col  col-1>
+        <span *ngIf = "arreglo.length != 0" class="slider-nav arrow-prev" (click)="slidePrev(sliderThree,slideWithNav3)">
+          <div class="prev-icon-custom custon-nav" [class.disabled]="estadoSlide.isBeginningSlide"></div>
+        </span>
+      </ion-col>
+      <ion-col col-10>
+
+        <ion-slides pager="false" slidesPerView="2" #slideWithNav3
+          (ionSlideDidChange)="SlideDidChange(sliderThree,slideWithNav3)">
+          <ion-slide *ngFor="let item of arreglo">
+            <div class="divs" (click)="subcatalogo(item.id,item.nombre)">
+              <img src="../../assets/imgs/categoriasimg.PNG" alt="">
+              <h5 style="color:#8a001e">{{item.nombre}}</h5>
+            </div>
+          </ion-slide>
+        </ion-slides>
+
+      </ion-col>
+      <ion-col col-1>
+        <span *ngIf = "arreglo.length != 0" class="slider-nav arrow-next" (click)="slideNext(sliderThree,slideWithNav3)">
+          <div class="next-icon-custom custon-nav" [class.disabled]="estadoSlide.isEndSlide"></div>
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+
+    <ion-list-header *ngIf = "loadIcon" style="text-align: center;">
+      <ion-spinner  name="bubbles" ></ion-spinner>
+    </ion-list-header>
+    <ion-list-header *ngIf = "!loadIcon" style="text-align: center;">
+     {{nombreClick}}
+    </ion-list-header>
+    <ion-card  *ngFor = "let i of subcategorias">
+      <img *ngIf = "!i.ruta_imagen.includes('null')" [src]="i.ruta_imagen"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{i.nombre}}
+          </ion-card-title>
+        <p>
+          <strong>Descripcion:</strong>
+          {{i.descripcion}}
+        </p>
+        <p>
+         <strong>Precio:</strong> {{i.precio | currency}} Pesos
+        </p>
+      </ion-card-content>
+      <ion-row>
+          <ion-col>
+            <button (click)="vervideo(i.id_video)" ion-button icon-start clear small>
+              <ion-icon name="logo-youtube"></ion-icon>
+              <div>Ver Vídeo</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-start clear small (click) = "agregarOrden(i.id_producto);">
+              <ion-icon name="add"></ion-icon>
+              <div>Añadir a Orden</div>
+            </button>
+          </ion-col>
+        </ion-row>
+    </ion-card>
+
+  </ion-list>
+ 
+  
+
+</ion-content>

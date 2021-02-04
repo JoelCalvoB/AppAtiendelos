@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Caja
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-refresher (ionRefresh)="actualizando($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid class="efecto" [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row>
+      <ion-col class="color1" *ngIf="deslizar">
+          <label><strong>Nombre mesero:</strong> {{nombre_mesero}}</label><br>
+          <label><strong>Folio:</strong> {{numeroFolio}}</label><br>
+          <label><strong>Hora:</strong> {{horaMesa}}</label>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Sección caja: Seleccionar mesa</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background:  #f3f3f3;
+height: 30px;" ></h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of arreglo;let indice = index" col-4 col-sm-3 col-md-2 col-lg-2 col-xl-2>
+        <div class="divs" [ngClass]="{'ocupado':item.colorear,'marcando':item.clase}" (click)="marcar(indice)">
+            <img *ngIf = "item.id_mesa != 0" src="../../assets/icon/mesaicon.PNG" alt="">
+            <img  *ngIf = "item.id_mesa == 0" src="../../assets/icon/run.png" alt="">
+          <h5>{{item.nombre}}</h5>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer [className]="menutogle ? 'menuemergente':'desaparecermenu'">
+  <ion-toolbar>
+    <button *ngIf="boolCobrar == true" (click)="configuraciones();" ion-button icon-only color="light">
+      <ion-icon name="settings"></ion-icon>
+    </button>
+    <button *ngIf="boolCancelar == true" (click)="cancelar();" ion-button icon-only color="cancelar">
+      <ion-icon name="close-circle"></ion-icon>
+    </button>
+    <button *ngIf="boolCobrar == true" (click)="cobrar();" ion-button icon-only color="success">
+      <ion-icon name="cash"></ion-icon>
+    </button>
+    <button *ngIf="boolCobrar == true && capitan==true" (click)="autorizar();" ion-button icon-only color="amarillo">
+        <ion-icon name="key"></ion-icon>
+      </button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-buttons end>
+        <button (click)="salir()" ion-button icon-end>
+          Salir
+        </button>
+      </ion-buttons>
+  
+      <ion-title>
+        Entradas y salidas
+      </ion-title>
+  
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content class="fondo">
+    <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+      <ion-row style="height: 100%;">
+        <ion-col>
+          <label style=" color: #ffe5e5;
+            font-size: larger;
+            /* font-family: -webkit-body; */
+            /* font-stretch: unset; */
+            font-weight: lighter;
+            font: icon;
+            font-weight: bold;
+            position: absolute;
+      bottom: 20px;">Ingresar Entrada o Salida</label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h3 style="text-align: center;
+    margin-top: -25px;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    background:  #f3f3f3;
+  height: 30px;" ></h3>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+
+      <ion-item>
+          <strong>Seleccione Tipo de Movimiento</strong>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="person" item-start></ion-icon>
+          <ion-select formControlName="tipo_mov" multiple="false">
+            <ion-option value="E">ENTRADA</ion-option>
+            <ion-option value="S">SALIDA</ion-option>
+          </ion-select>
+        </ion-item>
+    
+    
+    <ion-item>
+      <strong>Seleccione Producto</strong>
+    </ion-item>
+
+    <button (click)="agregarinventario()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+
+      <ion-icon name="add-circle"></ion-icon>
+    </button>
+
+    <ion-item *ngFor="let item of inventario">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/enlace.png">
+      </ion-avatar>
+      <h2><strong>{{item.descripcion}}</strong></h2>
+    </ion-item>
+
+
+    <ion-item>
+      <strong>Seleccione Ubicación</strong>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="person" item-start></ion-icon>
+      <ion-label stacked>Seleccionar Ubicación</ion-label>
+      <ion-select   formControlName="ubicacion" multiple="false">
+          <ion-option  value="0">SUCURSAL ACTUAL</ion-option>
+        <ion-option  *ngFor="let i of arreglo1"  value="{{i.id_bodega}}">{{i.nombre_bodega}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <strong>Inserte Cantidad</strong>
+    </ion-item>
+    <ion-item *ngFor="let item of inventario">
+      <ion-input  type="number" formControlName="cantidad" placeholder="Cantidad" [(ngModel)] = "item.cantidad"></ion-input>
+      <strong style="color:red " item-end>{{item.unidad_medida}}</strong>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Observaciones:</ion-label>
+        <ion-input formControlName="observaciones" type="text" placeholder="Observaciones"></ion-input>
+      </ion-item>
+
+    <button ion-button block type="submit" [disabled]="!myForm.valid">Hecho</button>
+
+  </form>
+</ion-content>

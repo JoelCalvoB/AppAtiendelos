@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="navegador">
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-buttons end>
+          <button (click)="salir()" ion-button icon-end>
+              Salir
+            
+          </button>
+        </ion-buttons>
+  
+      <ion-title>
+        Estadísticas
+      </ion-title>
+     
+    </ion-navbar>
+  </ion-header>
+<ion-content>
+    <button class="boton1" ion-button block type="button" (click)="Grafica();">
+        Generar reporte</button>
+  <ion-item> 
+    <div id="chart_wrap">
+    <div  id="curve_chart"></div> 
+  </div> 
+  <ion-item-sliding *ngFor="let item of arreglo" >
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/inventario.jpg">
+      </ion-avatar>
+     <h3 style= "color:red ">Mes:
+        <p *ngIf="item.mes == '1'">Enero</p>
+        <p *ngIf="item.mes == '2'">Febrero</p>
+        <p *ngIf="item.mes == '3'">Marzo</p>
+        <p *ngIf="item.mes == '4'">Abril</p>
+        <p *ngIf="item.mes == '5'">Mayo</p>
+        <p *ngIf="item.mes == '6'">Junio</p>
+        <p *ngIf="item.mes == '7'">Julio</p>
+        <p *ngIf="item.mes == '8'">Agosto</p>
+        <p *ngIf="item.mes == '9'">Septiembre</p>
+        <p *ngIf="item.mes == '10'">Octubre</p>
+        <p *ngIf="item.mes == '11'">Noviembre</p>
+        <p *ngIf="item.mes == '12'">Diciembre</p>
+
+        </h3>
+    <p><strong style= "color:rgb(8, 138, 66)">Total: $</strong>{{item.sum}}</p>
+    </ion-item>
+    </ion-item-sliding>
+  </ion-item>
+  </ion-content>

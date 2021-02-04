@@ -1,0 +1,7 @@
+{
+  "name": "atiendelosRestaurantapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

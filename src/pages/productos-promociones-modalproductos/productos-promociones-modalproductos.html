@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Seleccionar productos</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of arreglo;let indice = index" >
+    <div>
+        <div class = "primerdiv">
+            <ion-item>
+                <ion-checkbox color="navegador" [(ngModel)]="item.seleccionado"></ion-checkbox>
+              </ion-item>
+        </div>
+        <div class = "segundodiv">
+            <ion-item >
+                <ion-avatar item-start>
+                    <img src="../../assets/imgs/foodicon.png">
+                  </ion-avatar>
+                <ion-label style = "color: #0049a7; font-weight: bold;"><marquee>{{item.nombre}}</marquee></ion-label>
+                <div item-end class="estilobotones" >
+                    <button ion-button color="rojo" class="botones" (click)="restar(indice);" icon-only>
+                      <ion-icon name="remove"></ion-icon>
+                    </button>
+                    <button class="numeral" ion-button icon-only color="botones">
+                        {{item.cantidad}}
+                      </button>
+                    <button class="botones"  ion-button icon-only color="botones" (click)="sumar(indice);">
+                      <ion-icon name="add"></ion-icon>
+                    </button>
+                  </div>
+              </ion-item>     
+        </div>
+    </div>
+  </div>
+  
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar color="gris" style="text-align: center">
+      <button (click)="guardarCambios();" ion-button icon-only color="light" style="width: 80%;">
+        Aceptar
+      </button>
+    </ion-toolbar>
+  </ion-footer>

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      CARTERA DE PROVEEDORES
+    </ion-title>
+
+      
+  </ion-navbar>
+
+ 
+  
+</ion-header>
+
+
+<ion-content>
+
+
+  <ion-refresher (ionRefresh)="actualizando($event)" >
+    <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+<ion-list> 
+    <ion-list-header color="light" class = "headerCabecera">
+        <strong>Inventarios</strong>
+      </ion-list-header>
+      <ion-searchbar placeholder="Buscar" (ionInput)="getItems($event)" [(ngModel)]="letras"></ion-searchbar>
+
+  <ion-item-sliding [ngClass] = "i.clase" *ngFor="let i of arreglo" >
+      <ion-item >
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/proveedores.png">
+          </ion-avatar>
+        <h1>{{i.nombre}}</h1>
+        </ion-item>
+        <ion-item-options side="right">
+            <button color="primary" ion-button (click)="desglose(i)">
+                <ion-icon name="clipboard"></ion-icon>Modificar
+              </button>
+          <button color="danger" (click) = "eliminarProveedor(i)" ion-button>
+            <ion-icon name="trash"></ion-icon>Eliminar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+</ion-list>
+
+
+  <ion-fab right bottom #fab>
+    <button ion-fab color="botonflotante">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+    <ion-fab-list  side="top">
+      <button ion-fab  (click) = "agregar(fab);">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Corte de caja
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of arreglo" col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1>
+        <div class="divs" (click)="abrirCorte(item)">
+          <img src="../../assets/icon/corteicon.png" alt="">
+          <h5 style="color:#00538a">{{item.fecha}}</h5>
+          <h5 style="color:#033582">{{item.dianombre}}</h5>
+          <p [ngClass]="{'verde':!item.cerrada,'rojo':item.cerrada}">{{!item.cerrada ? 'CORTE ABIERTO':'CORTE CERRADO'}}</p>
+          <p style="color: black">Fondo: {{item.efectivo_apertura | currency}}</p>
+          <p>{{item.hora}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button (click)="nuevo();" style="float: right;
+      width: 60px;" ion-button icon-only color="nuevo">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <button (click)="reporte();" style="float: right;
+    width: 60px;" ion-button icon-only color="calendario">
+    <ion-icon name="calendar"></ion-icon>
+  </button>
+  </ion-toolbar>
+</ion-footer>

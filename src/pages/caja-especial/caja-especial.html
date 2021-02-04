@@ -1,0 +1,71 @@
+<p>prueba</p><ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Corte de Caja *E*
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Elegir fecha a buscar</ion-label>
+          <ion-datetime display-format="MMM DD, YYYY" monthShortNames='Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic'
+            doneText="Hecho" cancelText="Cancelar" [(ngModel)]="fecha"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-9>
+        <button ion-button block type="button" (click)="buscar();">
+          Buscar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block type="button" (click)="eliminar();">
+          Eliminar</button>
+      </ion-col>
+    
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngFor="let item of arreglo">
+   <ion-item>
+    <ion-label> <h5>Folio:</h5> <p>{{item.id_folio}}</p> </ion-label>
+    <ion-label> <h5>Importe:</h5> <p>${{item.total}}</p></ion-label>
+    <ion-label> <h5>Tipo Pago
+        <p *ngIf="item.tipo_pago == 'E'">Efectivo</p>
+        <p *ngIf="item.tipo_pago == 'T'">Tarjeta</p>
+        <p *ngIf="item.tipo_pago == 'C'">Cortesia</p>
+        <p *ngIf="item.tipo_pago == ''">Otros</p>
+        </h5>
+    </ion-label>
+    <ion-checkbox [(ngModel)] = "item.seleccionado">
+    </ion-checkbox>
+
+   </ion-item>
+
+
+  </ion-list>
+
+  <ion-toolbar color="gris" style="text-align: center">
+      <button (click) = "hecho();" ion-button icon-only color="primary" style="width: 40%;">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+  </ion-toolbar>
+  
+</ion-content>

@@ -1,0 +1,36 @@
+page-tickets {
+    .arriba{
+        background-color: rgb(1, 173, 1);
+        height: 150px;
+    }
+    .formarletra{
+        text-align: center;
+        font-size: 180%;
+        color:white;
+        
+    }
+    
+    .imagen{
+        width: 200px !important;
+        margin-top: -40px !important;;
+    }
+    
+    .scroll-content{
+        background: white;
+    }
+    
+    .etiqueta1{
+        color: #3977c7;
+        font-size: 17px;
+    }
+    .etiqueta2{
+        color:#3977c7;
+    }
+    .boton{
+        position: absolute;
+        right: 0px;
+        top: 147px;
+        width: 23px !important;
+        height: 23px !important;
+    }
+}

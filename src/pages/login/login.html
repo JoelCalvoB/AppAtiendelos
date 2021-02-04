@@ -1,0 +1,62 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content class="fondo">
+  <img src="../../assets/imgs/logoresutaurante.png" (click)="verEmpresas(1)" class="logo fadeIn animacion">
+  <div id="container" class="fadeIn animacion">
+    <div>
+      <label class="titulo" *ngIf="empresa != undefined">{{empresa.nombre}}</label>
+    </div>
+
+
+
+    <ion-list>
+
+
+
+      <ion-item id="rounded" style="background: #e4e4e4;" (click)="seleccionarUsuario()">
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/usuarios.png">
+        </ion-avatar>
+
+        <ion-input disabled #usuario type="text" value="" placeholder="Seleccionar usuario"></ion-input>
+      </ion-item>
+
+      <ion-item id="rounded">
+        <ion-avatar item-start>
+          <img src="../../assets/icon/key.png">
+        </ion-avatar>
+
+        <ion-label fixed>Contraseña</ion-label>
+        <ion-input #contra type="password" pattern="[0-9]*" inputmode="numeric" value=""></ion-input>
+      </ion-item>
+      <!-- 
+
+<ion-item id="rounded">
+        <ion-label>Seleccionar Sucursal </ion-label>
+        <ion-select [(ngModel)]="sucursal">
+          <ion-option *ngFor="let i of arreglo" value="{{i.id}}">{{i.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+        -->
+
+      <ion-item id="rounded">
+        <button class="botones" ion-button icon-end (click)="ingresar(usuario,contra);">
+          Ingresar
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+      </ion-item>
+
+
+    </ion-list>
+  </div>
+  <label  class="esquina">
+    <strong>Versión {{version}}</strong>
+  </label>
+</ion-content>

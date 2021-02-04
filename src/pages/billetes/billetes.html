@@ -1,0 +1,185 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Billetes</ion-title>
+      <ion-buttons left>
+        <button (click)="salir()" ion-button icon-end icon-only>
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row class="cabecera">
+      <ion-col>
+        Dinero en caja
+      </ion-col>
+      <ion-col col-6 style="text-align: right">
+        {{caja|currency}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="billete">
+      <ion-col>
+        Billetes
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+          <ion-img width="40" height="40" src="../../assets/icon/entradaicon.jpg"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+            
+          <ion-label color="success">{{1000|currency}}</ion-label>
+          <ion-input [(ngModel)] = "mil" type = "number"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/entradaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{500|currency}}</ion-label>
+            <ion-input [(ngModel)] = "quinientos"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/entradaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{200|currency}}</ion-label>
+            <ion-input [(ngModel)] = "docientos"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/entradaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{100|currency}}</ion-label>
+            <ion-input [(ngModel)] = "cien"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/entradaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{50|currency}}</ion-label>
+            <ion-input [(ngModel)] = "cincuenta"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/entradaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{20|currency}}</ion-label>
+            <ion-input [(ngModel)] = "veinte"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/monedaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{10|currency}}</ion-label>
+            <ion-input [(ngModel)] = "diez"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/monedaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{5|currency}}</ion-label>
+            <ion-input [(ngModel)] = "cinco" type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/monedaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{2|currency}}</ion-label>
+            <ion-input [(ngModel)] = "dos" type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/monedaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{1|currency}}</ion-label>
+            <ion-input [(ngModel)] = "uno" type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-2>
+            <ion-img width="40" height="40" src="../../assets/icon/monedaicon.jpg"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              
+            <ion-label color="success">{{0.50|currency}}</ion-label>
+            <ion-input [(ngModel)] = "centavo"  type = "number"></ion-input>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row class="cabecera">
+      <ion-col>
+        Total
+      </ion-col>
+      <ion-col col-6 style="text-align: right">
+        {{obtenerBillete() | currency}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="cabecera" style="background: #e6e8e5;
+    color: black;">
+      <ion-col>
+        Diferencia
+      </ion-col>
+      <ion-col col-6 style="text-align: right" >
+        {{obtenerDiferencia()| currency}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar color="gris" style="text-align: center">
+      <button (click)="realizar();" ion-button icon-only color="light" style="width: 80%;">
+        Realizado
+      </button>
+    </ion-toolbar>
+  </ion-footer>

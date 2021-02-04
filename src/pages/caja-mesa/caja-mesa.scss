@@ -1,0 +1,94 @@
+page-caja-mesa {
+    .fondo{
+
+        background: #f3f3f3;
+    }
+
+    .divs{
+      background: #f3f3f3;
+      text-align: center;
+      color:gray;
+      border-radius: 10%;
+      width: 90%;
+    }
+
+    .divs img{
+        
+        width: 50%;
+        height: 50%;
+        margin-top: 3px;
+        height: 70px;
+      }
+
+  h3{
+      color:rgb(138, 0, 30),
+  }
+  .background{
+    background-image: url('../../assets/imgs/mesas.jpg');
+    height: 30%;
+    background-size: cover;
+  }
+
+
+  .menuemergente{
+      position: fixed;
+      visibility: visible;
+      bottom: 0px;
+      animation: aparecer 1s;
+  }
+  .menuemergente button{
+    float: right;
+    width: 60px;
+}
+
+  @keyframes aparecer {
+       from {
+           opacity: 0;
+       }
+       to{
+           opacity: 0.8;
+       }
+  }
+
+ 
+
+  .desaparecermenu{
+    visibility: hidden;
+  }
+
+  .marcando{
+      background: #fff46f;
+  }
+
+  .ocupado{
+      background:#6fffa3;
+  }
+
+  .cabeceramenu{
+    animation: deslizarr 1s;
+    background: #ff3a52;height: 30%;    background-image: linear-gradient(#ff3a52, #861c29);
+}
+
+.normal{
+    background: #ff3a52;height: 20%;    background-image: linear-gradient(#ff3a52, #861c29);
+}
+
+.color1 > label{
+    font-size: large;
+    color: #f9e5e5;
+    text-align: center;
+}
+
+.efecto{
+    position: sticky;
+    top: 0;
+    padding: 5px;
+    /* background-color: #cae8ca; */
+    /* border: 2px solid #4CAF50; */
+    z-index: inherit;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    opacity: 0.93;
+}
+
+}

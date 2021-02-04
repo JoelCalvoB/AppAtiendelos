@@ -1,0 +1,345 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="!buscarbool && !esVenta">{{objTicket.nombre}} - Comensal {{comensalSeleccionado}}</ion-title>
+    <ion-title *ngIf="!buscarbool && esVenta">Buscar productos</ion-title>
+    <ion-buttons *ngIf="!buscarbool" left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+    <ion-searchbar *ngIf="buscarbool" placeholder="Buscar" (ionInput)="getItems($event)" [(ngModel)]="letras"></ion-searchbar>
+    <ion-buttons *ngIf="!regresar && !buscarbool" right>
+      <button (click)="buscar()" ion-button icon-end icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="!regresar && buscarbool" right>
+      <button (click)="buscarcerrar()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="!regresar && !buscarbool && !esVenta && !consulta" right>
+      <button (click)="configuracion()" ion-button icon-end icon-only>
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf="regresar" right>
+      <button (click)="selectedTab(0)" ion-button icon-end icon-only>
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+  <ion-toolbar mode="md" color="fondo">
+    <ion-segment #segments mode="md" [(ngModel)]="page" style="background: white;display: flex;">
+      <ion-segment-button *ngIf="!aparecerOpcionesBool" value="0" (click)="selectedTab(0)" style="color:#00539c;font-size: large;">
+        Categorías
+      </ion-segment-button>
+      <ion-segment-button *ngIf="!esVenta" value="1" (click)="selectedTab(1)" style="color:#00539c;font-size: large;">
+        Detalle
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="fondo">
+  <ion-slides #slider (ionSlideDidChange)="slideChanged()">
+    <ion-slide>
+      <ion-content *ngIf="!buscarbool" class="fondo" padding>
+        <div cards>
+
+          <div class="grid-full">
+
+            <ion-row>
+              <ion-col class="animar" *ngFor="let item of arreglo" col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1>
+                <div class="divs" (click)="seleccionar(item)">
+                  <img src="../../assets/icon/catalogo.png" alt="">
+                  <h5>{{item.nombre}}</h5>
+                </div>
+              </ion-col>
+            </ion-row>
+
+          </div>
+        </div>
+      </ion-content>
+
+      <ion-content *ngIf="buscarbool" class="fondo">
+        <div *ngIf="detalleobservaciones == false">
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngFor="let i of arreglomostrar;let indice = index;" col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4>
+                <div class="divs">
+                  <img [src]="i.ruta_imagen" alt="">
+                  <div style="font-size: larger;    font-weight: 500; ">{{i.nombre}}</div>
+                  <div style="color: #636262;font-size: xx-small">{{i.descripcion}}</div>
+                  <div style="color: #636262;font-size: larger">{{i.precio | currency}}</div>
+                  <button ion-button icon-only color="rosado" style="border-radius: 50%;" (click)="restar(indice);">
+                    <ion-icon name="remove"></ion-icon>
+                  </button>
+                  <button ion-button icon-only class="estiloBoton" (click)="agregarObservaciones(i)">
+                    {{getcantidad(indice)}}
+                  </button>
+                  <button ion-button icon-only color="rosado" style="border-radius: 50%;" (click)="sumar(indice);">
+                    <ion-icon name="add"></ion-icon>
+                  </button>
+                  <div style="color: #636262;font-size: small">Añadir a mesa</div>
+                  <div>
+                    <button (click)="addMesa(i)" ion-button icon-only color="rosado" style="border-radius: 10%;
+                            width: 100%;">
+                      <ion-icon name="checkmark-circle"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div *ngIf="detalleobservaciones == true" padding>
+          <button (click)="cerrardetalleobservaciones()" id="x" style=" position: absolute;
+          background: rgb(0, 0, 0);
+          color: white;
+          top: 10px;
+          right: 10px;
+          z-index: 12;border-radius: 40%;    width: 23px;
+          height: 23px;">
+            X
+          </button>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)="btnTiempos(1)">
+                <div class="divs">
+                  <img src="../../assets/icon/tiempo.png" alt="">
+                  <div style="font-size: larger;    font-weight: 500; ">TIEMPO 1</div>
+                </div>
+              </ion-col>
+              <ion-col col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)="btnTiempos(2)">
+                <div class="divs">
+                  <img src="../../assets/icon/tiempo.png" alt="">
+                  <div style="font-size: larger;    font-weight: 500; ">TIEMPO 2</div>
+                </div>
+              </ion-col>
+              <ion-col col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)="btnTiempos(3)">
+                <div class="divs">
+                  <img src="../../assets/icon/tiempo.png" alt="">
+                  <div style="font-size: larger;    font-weight: 500; ">TIEMPO 3</div>
+                </div>
+              </ion-col>
+              <ion-col col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)="btnObservacion()">
+                <div class="divs">
+                  <img src="../../assets/icon/lupa.PNG" alt="">
+                  <div style="font-size: larger;    font-weight: 500; ">OBSERVACIONES</div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-list>
+            <ion-item>
+              <ion-avatar item-start>
+                <img src="../../assets/icon/desbordamiento.png">
+              </ion-avatar>
+              <ion-label stacked>Cantidad:</ion-label>
+              <ion-input [(ngModel)]="objActual.cantidad"  type="number" placeholder="Cantidad"></ion-input>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>
+
+
+    </ion-slide>
+    <ion-slide *ngIf="!esVenta">
+
+      <ion-header>
+
+      </ion-header>
+      <ion-content class="fondo" padding *ngIf="!esVenta">
+        <div *ngIf="aparecerOpcionesBool && !consulta">
+          <button (click)="apareceropc()" id="x" style=" position: absolute;
+            background: rgb(0, 0, 0);
+            color: white;
+            top: 10px;
+            right: 10px;
+            z-index: 12;border-radius: 40%;    width: 23px;
+            height: 23px;">
+            X
+          </button>
+          <ion-toolbar>
+
+
+            <div *ngIf="!aparecerComensales">
+
+              
+         
+
+              <button class="animar" (click)="separarItems();" ion-button icon-only color="primary">
+               SEPARAR P. <ion-icon name="logo-buffer"></ion-icon>
+              </button>
+              <button class="animar" (click)="abrirSepararMesas();" ion-button icon-only color="primary">
+              N°COMENSALES <ion-icon name="bookmarks"></ion-icon>
+              </button>
+            </div>
+            <div *ngIf="aparecerComensales">
+              <button (click)="seleccionarComensal();" ion-button icon-only color="success" style="width: 80%;">
+                Seleccionar comensal
+              </button>
+            </div>
+
+
+          </ion-toolbar>
+        </div>
+
+        <ion-grid class="fondo letras">
+          <ion-row>
+            <ion-col>
+              <ion-spinner name="bubbles" *ngIf="cargadoicon == true"></ion-spinner>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="aparecerOpcionesBool && aparecerComensales && !consulta">
+            <ion-item>
+              <ion-label style="color: #203a50;
+                font-size: larger;text-align: center
+            ">
+                <strong>COMENSAL {{comensalSeleccionado}} ({{arregloSeparar[llave] == undefined ? "0":arregloSeparar[llave].length}})</strong>
+              </ion-label>
+            </ion-item>
+          </ion-row>
+          <ion-row *ngIf="aparecerOpcionesBool && desmoronaritems && !consulta">
+            <ion-item>
+              <ion-label style="color: #203a50;
+                font-size: larger;text-align: center
+            ">
+                <strong>OPCIONES</strong>
+              </ion-label>
+            </ion-item>
+          </ion-row>
+          <div *ngFor="let i of detalle;let indice = index;" (dblclick)="aparecerOpciones()">
+            <ion-row *ngIf="aparecerOpcionesBool && !consulta">
+              <ion-item [ngClass]="{'animar verdenuevo': i.copia}"  (dblclick)="aplicandodesmoronar(i,indice)">
+                <ion-label style="color: #4d87ba;
+                    font-size: larger;
+                ">
+                  <strong>{{i.cantidad}} </strong> {{i.nombre}}</ion-label>
+                <ion-toggle [disabled] = "i.cancelado" *ngIf="!aparecerComensales && !desmoronarbool && !desmoronaritems"  [(ngModel)] = "i.cancelado" checked="false"   ></ion-toggle>
+                <ion-icon *ngIf="i.copia" style="color:rgb(204, 2, 2)" item-end name="trash" (click)="eliminarDesmoronar(i,indice)"></ion-icon>
+                <ion-icon *ngIf="aparecerComensales" item-end name="add-circle" (click)="anadir(i,indice)"></ion-icon>
+                <ion-icon *ngIf="desmoronaritems && i.cantidad>1" item-end name="arrow-dropdown-circle"></ion-icon>
+              </ion-item>
+            </ion-row>            
+            <ion-row *ngIf="!aparecerOpcionesBool">
+              <ion-col col-5 style="    color: #4d87ba;
+                font-weight: 500;
+                font-size: larger;    text-align: left;">
+               <div>{{i.nombre}}</div> 
+               <div style=" color: #0f0f0f;">Hora:{{i.hora}}</div> 
+              </ion-col>
+              <ion-col col-2 *ngIf="!i.servido && !aparecerOpcionesBool && !consulta">
+                <button (click)="modificaCuenta(i)" style="top: -10px;border-radius: 30%;" ion-button icon-only color="amarillo">
+                  <ion-icon name="brush"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col col-2 *ngIf="i.servido && !aparecerOpcionesBool">
+                <button *ngIf="!i.cancelado && (i.cortesia == null || i.cortesia == 0)" (click)="cancelardetalle(i)" style="top: -10px;border-radius: 30%;" ion-button
+                  icon-only color="success">
+                  <ion-icon name="checkmark"></ion-icon>
+                </button>
+                <button *ngIf="i.cancelado && !aparecerOpcionesBool" style="top: -10px;border-radius: 30%;" ion-button icon-only color="danger">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+                <button *ngIf="!i.cancelado && (i.cortesia == 1 || i.cortesia == 2) && !aparecerOpcionesBool" style="top: -10px;background: #006280;border-radius: 30%;"
+                  ion-button icon-only>
+                  <ion-icon name="pricetags"></ion-icon>
+                </button>
+                <button *ngIf="!i.cancelado && i.cortesia == 3 && !aparecerOpcionesBool" style="top: -10px; background: #29a075;border-radius: 30%;"
+                  ion-button icon-only>
+                  <ion-icon name="happy"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col col-2 style="    color: #4d87ba;
+                font-weight: 500;
+                font-size: larger;">
+                {{i.cantidad}}
+              </ion-col>
+              <ion-col style="    color: #ff3a52;
+                font-weight: 500;
+                font-size: larger;    text-align: end;">
+                {{(i.precio) | currency}}
+              </ion-col>
+            </ion-row>            
+          </div>
+
+        
+          <ion-row *ngIf="aparecerOpcionesBool && aparecerComensales && !consulta">
+            <ion-col>
+              <button (click)="guardarCambiosComensales();" ion-button icon-only color="light" style="width: 80%;">
+                Guardar Cambios
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!aparecerOpcionesBool" style="background: #caefe5;font-size: 115%; color: #4d87ba;">
+            <ion-col col-9 style="text-align: right; ">
+              <strong>Total:</strong>
+            </ion-col>
+            <ion-col>
+              <strong>{{total | currency}}</strong>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+      </ion-content>
+    </ion-slide>
+    <ion-slide *ngIf="aparecerOpcionesBool && aparecerComensales && !consulta">
+      <ion-content>
+        <ion-row>
+          <ion-item>
+            <ion-label style="color: #203a50;
+              font-size: larger;text-align: center
+          ">
+              <strong>COMENSAL {{comensalSeleccionado}}</strong>
+            </ion-label>
+          </ion-item>
+        </ion-row>
+        <ion-row *ngFor="let item of arregloSeparar[llave];let indice=index;">
+          <ion-item>
+            <ion-label style="color: #4d87ba;
+              font-size: larger;
+          ">
+              <strong>{{item.cantidad}} </strong> {{item.nombre}}</ion-label>
+            <ion-toggle *ngIf="!aparecerComensales" checked="false"></ion-toggle>
+            <button (click)="eliminarRegresar(item,indice)" *ngIf="aparecerComensales" ion-button clear item-end>Eliminar</button>
+          </ion-item>
+        </ion-row>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer *ngIf="!aparecerOpcionesBool && !esVenta">
+  <ion-toolbar color="gris" style="text-align: center">
+    <button *ngIf="detalleobservaciones==false" (click)="verCuenta();" ion-button icon-only color="light" style="width: 80%;">
+      Ver cuenta
+    </button>
+    <button *ngIf="detalleobservaciones == true" (click)="guardarCambiosObservaciones();" ion-button icon-only color="success"
+      style="width: 80%;">
+      Aceptar
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer  *ngIf="desmoronaritems && !esVenta">
+  <ion-toolbar color="gris" style="text-align: center">
+    <button  (click)="guardaritemsseparados();" ion-button icon-only color="success"
+    style="width: 80%;">
+    Guardar cambios
+    </button>
+  </ion-toolbar>
+</ion-footer>
+<ion-footer  *ngIf="!desmoronaritems && !esVenta && aparecerOpcionesBool && !consulta && !aparecerComensales">
+  <ion-toolbar color="gris" style="text-align: center">
+    <button style="color: #000;
+    background-color: #ffe600;" (click)="realizarAccion();" ion-button icon-only color="amarillo"
+    style="width: 80%;">
+     Acción
+    </button>
+  </ion-toolbar>
+</ion-footer>
+

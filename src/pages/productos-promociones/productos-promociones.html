@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color="navegador">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Administración de promociones
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-refresher (ionRefresh)="actualizando($event)" >
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <ion-list>
+    <ion-list-header color="light">
+      <strong>Promociones</strong>
+      <ion-icon item-end name="person"></ion-icon>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let i of arreglo">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/iconpromocion2.png">
+        </ion-avatar>
+      <h2><strong>Nombre:</strong> {{i.nombre}}</h2>
+      <p><strong>Precio:</strong>{{i.precio}} </p>
+      </ion-item>
+      <ion-item-options side="right">
+          <button color="success" ion-button (click) = "actualizar(i)">
+              <ion-icon name="brush"></ion-icon>Modificar
+            </button>
+        <button color="danger" (click) = "eliminar(i)" ion-button>
+          <ion-icon name="trash"></ion-icon>Eliminar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+
+  </ion-list>
+  <ion-fab right bottom #fab>
+    <button ion-fab color="botonflotante">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+    <ion-fab-list  side="top">
+      <button ion-fab  (click) = "agregar(fab);">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

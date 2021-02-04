@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="!esVenta">{{objTicket.nombre}} - Comensal {{comensalSeleccionado}}</ion-title>
+    <ion-title *ngIf="esVenta">Productos</ion-title>
+    <ion-buttons left>
+      <button *ngIf="mostrarOpciones == false" (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+      <button *ngIf="mostrarOpciones == true" (click)="regresar()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button (click)="buscarActivando()" ion-button icon-end icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="fondo">
+  <div>
+    <ion-searchbar placeholder="Buscar producto" *ngIf="buscar" (ionInput)="getItems($event)" [(ngModel)]="letras"></ion-searchbar>
+    <div *ngIf="mostrarOpciones == false">
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let i of arreglo;let indice = index;" col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4>
+            <div class="divs">
+              <img [src]="i.ruta_imagen" alt="">
+              <div style="font-size: larger;    font-weight: 500; ">{{i.nombre}}</div>
+              <div style="color: #636262;font-size: xx-small">{{i.descripcion}}</div>
+              <div style="color: #636262;font-size: larger">{{i.precio | currency}}</div>
+              <button ion-button icon-only color="rosado" style="border-radius: 50%;" (click)="restar(indice);">
+                <ion-icon name="remove"></ion-icon>
+              </button>
+              <button ion-button icon-only class="estiloBoton" (click)="mostrarOpcionesMetod(i)">
+                {{getcantidad(indice)}}
+              </button>
+              <button ion-button icon-only color="rosado" style="border-radius: 50%;" (click)="sumar(indice);">
+                <ion-icon name="add"></ion-icon>
+              </button>
+              <div style="color: #636262;font-size: small">Añadir a mesa</div>
+              <div>
+                <button (click)="addMesa(i)" ion-button icon-only color="rosado" style="border-radius: 10%;
+                      width: 100%;">
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div *ngIf="mostrarOpciones == true" padding>
+      
+    <ion-grid>
+      <ion-row>
+        <ion-col  col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)= "btnTiempos(1)">
+          <div class="divs">
+            <img src="../../assets/icon/tiempo.png" alt="">
+            <div style="font-size: larger;    font-weight: 500; ">TIEMPO 1</div>
+          </div>
+        </ion-col>
+        <ion-col  col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)= "btnTiempos(2)">
+          <div class="divs">
+            <img src="../../assets/icon/tiempo.png" alt="">
+            <div style="font-size: larger;    font-weight: 500; ">TIEMPO 2</div>
+          </div>
+        </ion-col>
+        <ion-col  col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click)= "btnTiempos(3)">
+          <div class="divs">
+            <img src="../../assets/icon/tiempo.png" alt="">
+            <div style="font-size: larger;    font-weight: 500; ">TIEMPO 3</div>
+          </div>
+        </ion-col>
+        <ion-col  col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 (click) = "btnObservacion()">
+          <div class="divs">
+            <img src="../../assets/icon/lupa.PNG" alt="">
+            <div style="font-size: larger;    font-weight: 500; ">OBSERVACIONES</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="../../assets/icon/desbordamiento.png">
+        </ion-avatar>
+        <ion-label stacked>Cantidad:</ion-label>
+        <ion-input [(ngModel)]="objActual.cantidad"  type="number" placeholder="Cantidad"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="mostrarOpciones == false">
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click)="verCuenta();" ion-button icon-only color="light" style="width: 80%;">
+      Ver cuenta
+    </button>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="mostrarOpciones == true">
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click)="aceptar();" ion-button full color = "success">
+      Aceptar
+    </button>
+  </ion-toolbar>
+</ion-footer>

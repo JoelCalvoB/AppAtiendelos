@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Descuento de Productos 
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Nombre:</ion-label>
+        <ion-input formControlName="nombre" type="text" placeholder="Nombre" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Precio:</ion-label>
+        <ion-input formControlName="precio" type="number" placeholder="Precio" disabled></ion-input>
+      </ion-item>   
+      
+      <ion-list>
+          <ion-list-header color="gris" style="text-align: center">
+             -- Enlazar Producto a Descontar --
+            </ion-list-header>
+          <ion-item *ngFor="let item of inventario">
+            <ion-avatar item-start>
+              <img src="../../assets/imgs/enlace.png">
+            </ion-avatar>
+            <h2><strong>{{item.descripcion}}</strong></h2>
+            <p>Cantidad: {{item.cantidad + ' ' + item.unidad_medida}}</p>
+            
+          </ion-item> 
+      </ion-list>
+      <ion-item >
+        <button (click)="agregarinventario()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+          
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-item>    
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!myForm.valid">Actualizar</button>
+    </div>
+  </form>
+</ion-content>

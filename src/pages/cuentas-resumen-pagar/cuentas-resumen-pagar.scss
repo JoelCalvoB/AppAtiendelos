@@ -1,0 +1,30 @@
+page-cuentas-resumen-pagar {
+   input{
+    text-align: center;
+   }
+   .item-radio-checked{
+       color:#40bb6f!important;
+   }
+
+   .divs{
+    background: white;
+    text-align: center;
+    color:gray;
+    border-radius: 10%;
+    width: 90%;
+  }
+
+  .divs img{
+      
+      height: 50%;
+      margin-top: 3px;
+      height: 70px;
+    }
+
+    .marcando{
+        background: #fff46f!important;
+        color:gray!important;
+        //border-top: 1px solid #ff0000;
+        //border-bottom: 1px s #ff0000;
+    }
+}

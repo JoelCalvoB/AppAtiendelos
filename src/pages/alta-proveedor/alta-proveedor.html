@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Proveedor
+    </ion-title>
+  </ion-navbar>
+ 
+  
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+        <ion-item>
+            <ion-icon name="person" item-start></ion-icon>
+            <ion-label stacked>Nombre:</ion-label>
+            <ion-input formControlName="nombre" type="text" placeholder="Nombre" ></ion-input>
+          </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Descripción:</ion-label>
+        <ion-input formControlName="descripcion" type="text" placeholder="Descripción" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Domicilio:</ion-label>
+        <ion-input formControlName="domicilio" type="text" placeholder="Domicilio" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>RFC:</ion-label>
+        <ion-input formControlName="rfc" type="text" placeholder="RFC" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>CORREO:</ion-label>
+        <ion-input formControlName="correo" type="text" placeholder="CORREO" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>TELÉFONO:</ion-label>
+        <ion-input formControlName="telefono" type="text" placeholder="TELÉFONO" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>NOTAS:</ion-label>
+        <ion-input formControlName="notas" type="text" placeholder="NOTAS" ></ion-input>
+      </ion-item>
+      </ion-list>
+      <div>
+        <button ion-button block type="submit" [disabled]="!myForm.valid">{{boton}}</button>
+      </div>
+    </form>
+  </ion-content>

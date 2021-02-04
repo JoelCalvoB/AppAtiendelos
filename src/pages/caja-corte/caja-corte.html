@@ -1,0 +1,237 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Corte de caja
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-content class="fondo">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label *ngIf="!cortecaja.cerrada" style="color: rgb(0, 119, 10);
+          text-align: center;
+          font-weight: 500;">Corte abierto</ion-label>
+          <ion-label *ngIf="cortecaja.cerrada" style="color: rgb(173, 0, 0);
+          text-align: center;
+          font-weight: 500;">Corte cerrado</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item style="color: #025dad;
+        font-weight: 400;
+        font-size: x-large;
+        text-align: center;">
+          Fondo: {{cortecaja.efectivo_apertura | currency}}
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+        <ion-item  style="color: #025dad;
+        font-weight: 400;
+        font-size: x-large;
+        text-align: center;">
+          Caja: {{(cortecaja.efectivo_apertura + totalEntradas+totalEfectivo) - totalSalida | currency}}
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="totales2 fondototal2" *ngIf="!cortecaja.cerrada">
+        <ion-col>
+          <ion-item style="background: white">
+            <button (click)="abrirbilletes()" item-end  ion-button icon-only color="light" type="button">
+              Billetes  
+              <ion-icon name="cash"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    <div *ngIf="aparecer == true">
+      <ion-row class="totales fondototal">
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="logo-usd"></ion-icon> Ventas totales</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="podium"></ion-icon> Ganancia</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales">
+        <ion-col>
+          <ion-item>
+            <ion-label>{{totales + totalEntradas  | currency}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>{{ totales + totalEntradas  - totalSalida | currency}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2 fondototal2">
+        <ion-col>
+          <ion-item >
+            <ion-label>
+              <ion-icon name="cash"></ion-icon> Ventas</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2" *ngFor="let item of efectivo">
+        <ion-col>
+          <ion-item style="font-size: medium;">
+            <ion-label [ngClass]="{'negritas': item.tipo_pago == 'TOTAL'}"> {{item.tipo_pago}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item style="font-size: medium;">
+            <ion-label [ngClass]="{'negritas': item.tipo_pago == 'TOTAL'}"> {{item.total -item.tarjeta| currency}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2 fondototal2">
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="cash"></ion-icon> Salidas en efectivo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2">
+        <ion-col>
+          <ion-list>
+            <ion-item-sliding *ngFor="let i of salidas;let indice = index">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="../../assets/imgs/salidaefectivo.png">
+                </ion-avatar>
+                <h2 style="text-align: initial"> {{i.nombre}}</h2>
+                <strong item-end>{{i.dinero | currency}}</strong>
+              </ion-item>
+              <ion-item-options side="right" *ngIf="!cortecaja.cerrada">
+                <button color="success" ion-button (click)="actualizar(i)">
+                  <ion-icon name="brush"></ion-icon>Modificar
+                </button>
+                <button color="danger" (click)="eliminar(i)" ion-button>
+                  <ion-icon name="trash"></ion-icon>Eliminar
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+
+
+          </ion-list>
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="../../assets/imgs/salidaefectivo.png">
+            </ion-avatar>
+            <h2 style="text-align: initial"> Total</h2>
+            <strong item-end>{{totalSalida | currency}}</strong>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2 fondototal2" *ngIf="!cortecaja.cerrada">
+        <ion-col>
+          <ion-item style="background: white">
+            <button (click)="realizarGastos()" item-end ion-button icon-only color="light" type="button">
+              <label>Guardar gastos</label>
+              <ion-spinner name="bubbles" item-end *ngIf="reloadicon == true"></ion-spinner>
+            </button>
+            <button (click)="addSalidas()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row class="totales2 fondototal2">
+        <ion-col>
+          <ion-item style="background: #c1ffc1">
+            <ion-label>
+              <ion-icon name="cash"></ion-icon> Entradas en efectivo</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2">
+        <ion-col>
+          <ion-list>
+            <ion-item-sliding *ngFor="let i of entradas;let indice = index">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="../../assets/icon/entradaicon.jpg">
+                </ion-avatar>
+                <h2 style="text-align: initial"> {{i.nombre}}</h2>
+                <strong item-end>{{i.dinero | currency}}</strong>
+              </ion-item>
+              <ion-item-options side="right" *ngIf="!cortecaja.cerrada">
+                <button color="success" ion-button (click)="actualizarEntrada(i)">
+                  <ion-icon name="brush"></ion-icon>Modificar
+                </button>
+                <button color="danger" (click)="eliminarEntrada(i)" ion-button>
+                  <ion-icon name="trash"></ion-icon>Eliminar
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+
+
+          </ion-list>
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="../../assets/icon/entradaicon.jpg">
+            </ion-avatar>
+            <h2 style="text-align: initial"> Total</h2>
+            <strong item-end>{{totalEntradas | currency}}</strong>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="totales2 fondototal2" *ngIf="!cortecaja.cerrada">
+        <ion-col>
+          <ion-item style="background: white">
+            <button (click)="realizarEntrada()" item-end ion-button icon-only color="light" type="button">
+              <label>Guardar entradas</label>
+              <ion-spinner name="bubbles" item-end *ngIf="reloadiconEntrada == true"></ion-spinner>
+            </button>
+            <button (click)="addEntradas()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-grid>
+
+
+</ion-content>
+
+
+<ion-footer>
+
+  <ion-toolbar color="gris" style="text-align: center">
+    <button *ngIf="!cortecaja.cerrada" (click)="corte();" ion-button icon-only color="light" style="width: 80%;">
+      Realizar corte
+    </button>
+    <button *ngIf="cortecaja.cerrada" (click)="imprimiendocorte();" ion-button icon-only color="light" style="width: 80%;">
+      Reimprimir corte
+    </button>
+
+  </ion-toolbar>
+</ion-footer>

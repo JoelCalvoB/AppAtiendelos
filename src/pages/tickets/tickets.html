@@ -1,0 +1,344 @@
+<ion-content>
+
+  <ion-grid class="arriba">
+    <ion-row style="height: 70%;" class="formarletra">
+      <ion-col>
+        <strong>&#10004;</strong>
+        <p>Cobrado</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <label class="etiqueta1">
+          <strong>Mesa:</strong>
+        </label>
+        <p class="etiqueta2">{{nombre_mesa}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="background: #e4e3e3">
+        <strong>Información del Ticket</strong>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="etiqueta2">
+        <strong>Folio N° {{folio}}</strong>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="etiqueta2">
+        <strong>Sucursal:</strong> {{nombre_sucursal}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col style="background: #e4e3e3">
+        <strong>Información de consumo</strong>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <strong>Descripción</strong>
+      </ion-col>
+      <ion-col>
+        <strong>Cantidad</strong>
+      </ion-col>
+      <ion-col>
+        <strong>Total</strong>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let i of arreglo">
+      <ion-col col-6>
+        {{i.nombre}}
+        <strong *ngIf="i.cortesia != 0 && i.cortesia != null"> *Producto con descuento</strong>
+      </ion-col>
+      <ion-col>
+        {{i.cantidad}}
+      </ion-col>
+      <ion-col>
+        {{i.precio_total | currency }}
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="iva == false && ivarecupera == false">
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Total: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{total | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-12 style="text-align: right;">
+          <strong *ngIf="cortesia == 1">Descuento por {{descuento | currency}}</strong>
+          <strong *ngIf="cortesia == 2">DESCUENTO POR {{descuento}}%</strong>
+          <strong *ngIf="cortesia == 3">TICKET DE CORTESIA</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let i of promociones">
+        <ion-row style="background: #e4e3e3;color: rgb(0, 44, 190); text-align: center;font-weight: bold">
+          APLICANDO PROMOCIONES
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            {{i.nombre}}
+          </ion-col>
+          <ion-col>
+            {{i.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{i.total | currency }}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of i.productos">
+          <ion-col col-6>
+            {{item.nombre}}
+          </ion-col>
+          <ion-col>
+            {{item.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{ (-1) * item.total | currency }}
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row *ngIf="promociones.length > 0" style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Total: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="billete" style="background: #e4e3e3;">
+        <ion-col col-6>
+        </ion-col>
+        <ion-col col-3 style="text-align: right;border-bottom: 1px solid black;">
+          <strong>Cobrado: </strong>
+        </ion-col>
+        <ion-col style="border-bottom: 1px solid black;">
+          <strong>{{billete | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="billete" style="background: #e4e3e3">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Cambio: </strong>
+        </ion-col>
+        <ion-col *ngIf="promociones.length == 0">
+          <strong>{{billete - total | currency}}</strong>
+        </ion-col>
+        <ion-col *ngIf="promociones.length != 0">
+          <strong>{{billete - totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div *ngIf="iva == true">
+
+
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Subtotal: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{total | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>IVA: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{iva_dinero| currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Total: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{iva_dinero+total | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-12 style="text-align: right;">
+          <strong *ngIf="cortesia == 1">Descuento por {{descuento | currency}}</strong>
+          <strong *ngIf="cortesia == 2">DESCUENTO POR {{descuento}}%</strong>
+          <strong *ngIf="cortesia == 3">TICKET DE CORTESIA</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let i of promociones">
+        <ion-row style="background: #e4e3e3;color: rgb(0, 44, 190); text-align: center;font-weight: bold">
+          APLICANDO PROMOCIONES
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            {{i.nombre}}
+          </ion-col>
+          <ion-col>
+            {{i.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{i.total | currency }}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of i.productos">
+          <ion-col col-6>
+            {{item.nombre}}
+          </ion-col>
+          <ion-col>
+            {{item.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{ (-1) * item.total | currency }}
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row *ngIf="promociones.length > 0" style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Total: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="billete" style="background: #e4e3e3;">
+        <ion-col col-6>
+        </ion-col>
+        <ion-col col-3 style="text-align: right;border-bottom: 1px solid black;">
+          <strong>Cobrado: </strong>
+        </ion-col>
+        <ion-col style="border-bottom: 1px solid black;">
+          <strong>{{billete | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="billete" style="background: #e4e3e3">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Cambio: </strong>
+        </ion-col>
+        <ion-col *ngIf="promociones.length == 0">
+          <strong>{{billete - (iva_dinero+total) | currency}}</strong>
+        </ion-col>
+        <ion-col *ngIf="promociones.length != 0">
+          <strong>{{billete -iva_dinero + totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+
+    </div>
+
+    <div *ngIf="ivarecupera == true">
+
+
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Subtotal: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{(total * 100)/116 | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>IVA: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{total - ((total * 100)/116)| currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Total: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{total | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row style="background: #e4e3e3;color: darkred;">
+        <ion-col col-12 style="text-align: right;">
+          <strong *ngIf="cortesia == 1">Descuento por {{descuento | currency}}</strong>
+          <strong *ngIf="cortesia == 2">DESCUENTO POR {{descuento}}%</strong>
+          <strong *ngIf="cortesia == 3">TICKET DE CORTESIA</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let i of promociones">
+        <ion-row style="background: #e4e3e3;color: rgb(0, 44, 190); text-align: center;font-weight: bold">
+          APLICANDO PROMOCIONES
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            {{i.nombre}}
+          </ion-col>
+          <ion-col>
+            {{i.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{i.total | currency }}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of i.productos">
+          <ion-col col-6>
+            {{item.nombre}}
+          </ion-col>
+          <ion-col>
+            {{item.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{ (-1) * item.total | currency }}
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row *ngIf="promociones.length > 0" style="background: #e4e3e3;color: darkred;">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Total: </strong>
+        </ion-col>
+        <ion-col>
+          <strong>{{totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="billete" style="background: #e4e3e3;">
+        <ion-col col-6>
+        </ion-col>
+        <ion-col col-3 style="text-align: right;border-bottom: 1px solid black;">
+          <strong>Cobrado: </strong>
+        </ion-col>
+        <ion-col style="border-bottom: 1px solid black;">
+          <strong>{{billete | currency}}</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="billete" style="background: #e4e3e3">
+        <ion-col col-9 style="text-align: right;">
+          <strong>Cambio: </strong>
+        </ion-col>
+        <ion-col *ngIf="promociones.length == 0">
+          <strong>{{billete - (iva_dinero+total) | currency}}</strong>
+        </ion-col>
+        <ion-col *ngIf="promociones.length != 0">
+          <strong>{{billete -iva_dinero + totalNeto | currency}}</strong>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click)="enviar();" ion-button icon-only color="primary" style="width: 80%;">
+      Ticket
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+    </button>
+
+  </ion-toolbar>
+</ion-footer>
+<button class="boton" (click)="cerrar1();" ion-button icon-only color="danger" style="width: 40%;z-index: 100;">
+  <ion-icon (click)="cerrar1();" name="close"></ion-icon>
+</button>

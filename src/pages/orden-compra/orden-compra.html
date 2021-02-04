@@ -1,0 +1,61 @@
+
+<ion-header>
+  <ion-navbar color="primary">  
+    <ion-title>
+      Ordenes de Compra
+    </ion-title>
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label>Num.Orden de Compra:</ion-label>
+        <ion-input  formControlName="folio" type="text" placeholder="N°Compra" value={{folio}} ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Fecha Elaboración:</ion-label>
+        <ion-input [(ngModel)] = "fecha"  formControlName="fecha" type="date" placeholder="Fecha inicial" value="{{myDate | date:'yyyy-MM-dd'}}" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Elaboró:</ion-label>
+        <ion-input formControlName="elaboro" type="text" placeholder="Elaboró" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-icon name="person" item-start></ion-icon>
+          <ion-label stacked>Seleccionar Ubicación</ion-label>
+          <ion-select   formControlName="ubicacion" multiple="false">
+              <ion-option  *ngFor="let i of arreglo1"  value="0">SUCURSAL ACTUAL</ion-option>
+            <ion-option  *ngFor="let i of arreglo1"  value="{{i.id_bodega}}">{{i.nombre_bodega}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+      <button (click)="agregarinventario()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+          
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+
+      <ion-item *ngFor="let item of inventario">
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/enlace.png">
+        </ion-avatar>
+        <h2><strong>{{item.descripcion}}</strong></h2>
+        <p>Cantidad: {{item.cantidad + ' ' + item.unidad_medida}}</p>
+        
+      </ion-item> 
+      
+
+        
+      </ion-list>
+      <div>
+        <button ion-button block type="submit" [disabled]="!myForm.valid">{{boton}}</button>
+      </div>
+    </form>
+  </ion-content>

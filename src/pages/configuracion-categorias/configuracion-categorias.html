@@ -1,0 +1,34 @@
+
+<ion-header>
+  <ion-navbar color="navegador">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Categorias de productos
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of arreglo">
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/categoriasimg.PNG">
+      </ion-avatar>
+      <h2>{{item.nombre}}</h2>
+      <button class="botonespersonalizados" (click)="abrirPagina(item.id);" color="blue" ion-button item-end>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

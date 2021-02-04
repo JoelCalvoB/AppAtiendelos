@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="navegador">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+        <button (click)="salir()" ion-button icon-end>
+            Salir
+          
+        </button>
+      </ion-buttons>
+
+    <ion-title>
+      Seguridad
+    </ion-title>
+   
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<h4 style="text-align: center">CONTRASEÑA DINÁMICA</h4>
+<button class="boton1" ion-button block type="button" (click)="genera();">
+  Generar llave</button>
+<ion-item style="text-align: center">
+  <h1 >{{llave}}</h1></ion-item>
+
+</ion-content>

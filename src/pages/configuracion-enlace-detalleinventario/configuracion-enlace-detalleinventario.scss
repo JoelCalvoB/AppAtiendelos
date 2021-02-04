@@ -1,0 +1,53 @@
+page-configuracion-enlace-detalleinventario {
+    .estilobotones button{
+        width: 25px;
+    }
+    .estilobotones input{
+     width: 30px;
+    }
+    .personal{
+    
+     width: 100%;
+    }
+    .estilobotones p{
+     width: 100%;
+     text-align: center;
+    }
+    
+    ion-segment {
+        display: block;
+        white-space: nowrap;
+        font-size: 0;
+        overflow: auto;
+    
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    
+        ion-segment-button.segment-button {
+            display: inline-block;
+            min-width: 50%;
+            width: auto;
+        }
+    }
+    ion-toolbar {
+      padding: 0px 4px !important;
+      min-height: 43px !important;
+    }
+    
+    .toolbar-ios ion-title {
+      padding: 0 0px 1px;
+    }
+    .slide-zoom{
+    
+        height: 100%;
+        width: 100%;
+    }
+    
+    .letras{
+    
+        font-size: 15px;
+    }
+}

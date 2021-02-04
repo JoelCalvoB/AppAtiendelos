@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+        Salir
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      Ayuda
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="fondo">
+  <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+    <ion-row style="height: 100%;">
+      <ion-col>
+        <label style=" color: #ffe5e5;
+          font-size: larger;
+          /* font-family: -webkit-body; */
+          /* font-stretch: unset; */
+          font-weight: lighter;
+          font: icon;
+          font-weight: bold;
+          position: absolute;
+    bottom: 20px;">Seleccionar opción</label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h3 style="text-align: center;
+  margin-top: -25px;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background:  #f3f3f3;
+height: 30px;" ></h3>
+
+  <ion-list>
+    <ion-item >
+      <ion-label style="color: #4d87ba;
+          font-size: larger;
+      ">
+        <strong>Pagina web</strong><p>wwww.atiendelosrestaurant.com</p>
+      <p><strong>Ir a la página para actualizar el sistema.</strong></p>
+      </ion-label>
+        
+      <ion-icon  item-end name="arrow-forward" (click)="ir()"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

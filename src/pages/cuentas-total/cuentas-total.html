@@ -1,0 +1,54 @@
+<!--
+  Generated template for the CuentasTotalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Cuenta de la mesa</ion-title>
+      <ion-buttons left>
+        <button (click)="salir()" ion-button icon-end icon-only>
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+
+<ion-content >
+    <ion-grid class="fondo letras">
+        <ion-row *ngFor="let i of detalle">
+          <ion-col col-5>
+            {{i.nombre}}
+          </ion-col>
+          <ion-col col-2 *ngIf="!i.servido">
+            <button (click)="modificaCuenta(i)" style="top: -10px;" ion-button icon-only color="amarillo">
+              <ion-icon name="brush"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-2 *ngIf="i.servido">
+            <button *ngIf="!i.cancelado" (click)="cancelardetalle(i)" style="top: -10px;" ion-button icon-only color="success">
+              <ion-icon name="checkmark"></ion-icon>
+            </button>
+            <button *ngIf="i.cancelado"  style="top: -10px;" ion-button icon-only color="danger">
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-2>
+            {{i.cantidad}}
+          </ion-col>
+          <ion-col>
+            {{(i.cantidad * i.precio) | currency}}
+          </ion-col>
+        </ion-row>
+        <ion-row style="background: #caefe5;font-size: 115%; color: #c50101;">
+            <ion-col col-9 style="text-align: right; ">
+                <strong>Total:</strong>
+            </ion-col>
+            <ion-col >
+                <strong>{{total | currency}}</strong>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

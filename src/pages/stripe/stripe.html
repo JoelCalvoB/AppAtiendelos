@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Medidas
+    </ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+
+<ion-content>
+
+  <form [formGroup]="myForm" (ngSubmit)="chargeCreditCard()">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="cardNumber" item-start></ion-icon>
+        <ion-label stacked>Número de Tarjeta:</ion-label>
+        <ion-input formControlName="cardNumber" type="numer" placeholder="Número de tarjeta"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="expMonth" item-start></ion-icon>
+        <ion-label stacked>Mes expiración:</ion-label>
+        <ion-input formControlName="expMonth" type="numer" placeholder="Mes de vencimiento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="expYear" item-start></ion-icon>
+        <ion-label stacked>Año expiración:</ion-label>
+        <ion-input formControlName="expYear" type="numer" placeholder="Año de vencimiento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="cvc" item-start></ion-icon>
+        <ion-label stacked>Año expiración:</ion-label>
+        <ion-input formControlName="cvc" type="numer" placeholder="CVC"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="mount" item-start></ion-icon>
+        <ion-label stacked>Monto a Cobrar:</ion-label>
+        <ion-input formControlName="mount" type="numer" placeholder="$0.00"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <div>
+      <button ion-button block type="submit" [disabled]="!myForm.valid">{{boton}}</button>
+    </div>
+  </form>
+
+
+</ion-content>

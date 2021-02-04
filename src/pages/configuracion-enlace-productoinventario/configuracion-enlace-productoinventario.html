@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Inventario - Productos
+    </ion-title>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="getItems($event)" [(ngModel)]="letras"></ion-searchbar>
+
+</ion-header>
+
+<ion-content >
+  <ion-refresher (ionRefresh)="actualizando($event)" >
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
+
+    <ion-list> 
+        <ion-list-header color="light">
+            <strong>Platillos-Recetas</strong>
+            <ion-icon item-end name="person"></ion-icon>
+          </ion-list-header>
+  
+      <ion-item-sliding [ngClass] = "i.clase" *ngFor="let i of arreglo">
+          <ion-item>
+              <ion-avatar item-start>
+                <img src="../../assets/imgs/inspecicon.jpg">
+              </ion-avatar>
+            <h2><strong>Nombre:</strong> {{i.nombre}}</h2>
+            <div>
+              <strong>Precio:</strong> {{i.precio | currency}}
+            </div>
+            <button class="botonespersonalizados" (click)="agregarInventario(i);" color="tabs" ion-button item-end>
+                <ion-icon  name="add-circle"></ion-icon>
+              </button>
+            </ion-item>
+          </ion-item-sliding>
+    </ion-list>
+
+
+  
+
+
+  
+</ion-content>

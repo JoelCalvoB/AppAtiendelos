@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="navegador">
+    <ion-title>{{titulo}}</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons  right>
+      <button *ngIf="desactivar==false" (click)="configuracion()" ion-button icon-end icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="fondo">
+    <div id="container" >
+      <ion-list>
+        <ion-item id="rounded" >
+          <ion-label fixed>No. </ion-label>
+          <ion-input  #usuario type="number" value="" placeholder = "Comensales" [(ngModel)] = "comensales"></ion-input>
+        </ion-item>
+        <ion-item id="rounded" style="background: #f3f3f3" >
+          <button item-end ion-button class="boton1" (click)="agregar()">Agregar comensales</button>
+        </ion-item>  
+      </ion-list>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of arreglo;let indice = index" col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3>
+            <div class="divs" [ngClass]="{'marcando':item.colorear}" style="text-align: center" (click)="marcar(indice,item)">
+              <img src="../../assets/icon/cliente.png"
+                alt="">
+              <h5 style="color: #10376f;">Comensal {{item.numero}}</h5>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar color="gris" style="text-align: center">
+      <button (click) = "confirmar();" ion-button icon-only color="primary" style="width: 80%;" [disabled] = "btn">            
+        Seleccionar
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+  
+  

@@ -1,0 +1,63 @@
+page-menu-sub-orden {
+    .fondo{
+
+        background: #f3f3f3;
+    }
+
+    .divs{
+      background: white;
+      text-align: center;
+      color:gray;
+      border-radius: 10%;
+      width: 90%;
+    }
+
+    .divs img{
+        border-radius: 50%;
+        
+        height: 50%;
+        margin-top: 3px;
+        height: 70px;
+      }
+
+  h3{
+      color:rgb(138, 0, 30),
+  }
+  .background{
+    background-image: url('../../assets/imgs/mesas.jpg');
+    height: 30%;
+    background-size: cover;
+  }
+
+
+  .menuemergente{
+      position: fixed;
+      visibility: visible;
+      bottom: 0px;
+      animation: aparecer 2s;
+  }
+  .menuemergente button{
+    float: right;
+    width: 60px;
+}
+
+  @keyframes aparecer {
+       from {
+           opacity: 0;
+       }
+       to{
+           opacity: 0.8;
+       }
+  }
+
+ 
+
+  .desaparecermenu{
+    visibility: hidden;
+  }
+
+  .marcando{
+      background: #fff46f;
+  }
+
+}

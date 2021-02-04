@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="navegador">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+        <button (click)="salir()" ion-button icon-end>
+            Salir
+          
+        </button>
+      </ion-buttons>
+
+    <ion-title>
+      Estadísticas
+    </ion-title>
+   
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+  <ion-label color="primary" fixed>Fecha inicial</ion-label>
+  <ion-input [(ngModel)] = "FechaI" type="date" placeholder="Fecha inicial"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label color="primary" fixed>Fecha Final</ion-label>
+  <ion-input  [(ngModel)] = "FechaF" type="date" placeholder="Fecha final"></ion-input>
+</ion-item>
+<button [disabled]="FechaI == undefined || FechaF == undefined" class="boton1" ion-button block type="button" (click)="Grafica();">
+  Generar reporte</button>
+
+  <ion-item> 
+    <div id="chart_wrap">
+    <div  id="donutchart"></div> 
+  </div> 
+  <ion-item-sliding *ngFor="let i of arreglo" >
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/inventario.jpg">
+      </ion-avatar>
+    <h2><strong style= "color:red ">Nombre: </strong> {{i.nombre}}</h2>
+    <h2><strong style= "color:red ">N°Ventas: </strong> {{i.n_notal}}</h2>
+    <p><strong style= "color:mediumseagreen ">Total: $</strong>{{i.total}}</p>
+    </ion-item>
+    </ion-item-sliding>
+  </ion-item>
+  </ion-content>

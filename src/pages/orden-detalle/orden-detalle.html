@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      DETALLE ORDEN DE COMPRA
+    </ion-title>
+    <ion-buttons left>
+        <button (click)="salir()" ion-button icon-end icon-only>
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-item>
+        <ion-label>Folio:{{folio}}</ion-label>
+        <ion-label>Fecha:{{fecha}}</ion-label>
+        <ion-label>Elaboró:{{elaboro}}</ion-label> 
+      </ion-item>
+  <ion-list>
+      <ion-item-sliding *ngFor="let a of desglose" >
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="../../assets/imgs/inventario.jpg">
+            </ion-avatar>
+          <h2><strong style= "color:red ">Nombre: </strong> {{a.descripcion}}</h2>
+          <h2><strong style= "color:red ">  Total:: </strong> {{a.cantidad + a.unidad_medida}}</h2>
+          </ion-item>
+          </ion-item-sliding>
+    
+   
+  </ion-list>
+
+
+  </ion-content>

@@ -1,0 +1,48 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Gestión de Bodegas
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+<form [formGroup]="myForm" (ngSubmit)="saveData()">
+  <ion-list>
+      <ion-item>
+          <ion-icon name="person" item-start></ion-icon>
+          <ion-label stacked>Nombre:</ion-label>
+          <ion-input formControlName="nombre_bodega" type="text" placeholder="Nombre o Alias" ></ion-input>
+        </ion-item>
+    <ion-item>
+      <ion-icon name="person" item-start></ion-icon>
+      <ion-label stacked>Ubicación:</ion-label>
+      <ion-input formControlName="ubicacion_bodega" type="text" placeholder="Ubicación" ></ion-input>
+    </ion-item>
+        <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Responsable:</ion-label>
+        <ion-input formControlName="responsable_bodega" type="text" placeholder="Responsable de Almacen"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-label stacked>Actualización Tiempo Real</ion-label>
+        <ion-select formControlName="tiempo_real" multiple="false">
+          <ion-option  value="true">Activo</ion-option>
+          <ion-option  value="false">Inactivo</ion-option>
+        </ion-select>
+      </ion-item>
+      
+    </ion-list>
+    <div>
+      <button ion-button block type="submit" [disabled]="!myForm.valid">{{boton}}</button>
+    </div>
+  </form>
+</ion-content>
+ 

@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>
+        Historial de inventario
+      </ion-title>
+  
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content class="fondo">
+    <ion-grid [ngClass]="{'normal':!deslizar,'cabeceramenu':deslizar}">
+      <ion-row style="height: 100%;">
+        <ion-col>
+          <label style=" color: #ffe5e5;
+            font-size: larger;
+            /* font-family: -webkit-body; */
+            /* font-stretch: unset; */
+            font-weight: lighter;
+            font: icon;
+            font-weight: bold;
+            position: absolute;
+      bottom: 20px;">Desglose de los movimientos</label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h3 style="text-align: center;
+    margin-top: -25px;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    background:  #f3f3f3;
+  height: 30px;" ></h3>
+
+
+  <ion-card *ngFor="let item of arreglo"  [ngClass]="{'entrada': item.tipo_mov == 'E', 'salida': item.tipo_mov == 'S', 'venta': item.tipo_mov == 'V','ordencompra': item.tipo_mov == 'OC'}">
+    <ion-card-header >
+     <h4>Fecha:<strong style=" color: #22818b;">{{item.fecha  | date}}  </strong> </h4> 
+     <h4>Hora:<strong> {{item.hora.substring(0,5)}} </strong> </h4>
+    </ion-card-header>
+    <ion-card-content style="text-align: end;">
+        <h4> Movimiento :<strong style="color: #22818b;">
+            <label *ngIf="item.tipo_mov == 'E'">Entrada</label>
+            <label *ngIf="item.tipo_mov == 'S'">Salida</label>
+            <label *ngIf="item.tipo_mov == 'V'">Consumido</label>
+            <label *ngIf="item.tipo_mov == 'OC'">Orden Compra</label>
+
+        </strong></h4>  
+        <h4> Cantidad :<strong style="color: #8b2222;    font-weight: bold;
+          font-size: large;
+          text-align: end;">{{item.cantidad_historial+ ' '+ item.unidad_medida}} </strong></h4>      
+    </ion-card-content>
+  </ion-card>
+  <ion-item style="text-align: center">
+    <p style="    font-size: x-large;
+    font-weight: 500;"> Total de Existencia:</p> 
+<p style="    color: red;
+font-weight: 500;
+font-size: x-large;">{{existencia}} </p>
+  </ion-item>
+
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar color="gris" style="text-align: center">
+      <button (click) = "realizarCorte()" ion-button icon-only color="light" style="width: 80%;">
+        Realizar corte
+      </button>
+    </ion-toolbar>
+  </ion-footer>
+

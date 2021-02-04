@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Órdenes Generadas.
+    </ion-title>
+  </ion-navbar>
+ 
+  
+</ion-header>
+
+
+
+
+<ion-content >
+  
+  <ion-refresher (ionRefresh)="actualizando($event)" >
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list> 
+      <ion-list-header color="light" class = "headerCabecera">
+          <strong>Lista de Órdenes de Compra</strong>
+        </ion-list-header>
+
+    <ion-item-sliding *ngFor="let i of arreglo" >
+      <ion-item >
+        <ion-avatar item-start>
+          <img src="../../assets/imgs/inventario.jpg">
+        </ion-avatar>
+      <h1 style="color: red"> FOLIO: {{i.folio}}</h1>
+      <h5 style="color: black">FECHA : {{i.fecha}}</h5>
+
+      </ion-item>
+          <ion-item-options side="right">
+              <button color="primary" ion-button (click)="desglose(i)">
+                  <ion-icon name="clipboard"></ion-icon>Consultar
+                </button>
+            <button color="danger" (click) = "eliminar(i)" ion-button>
+              <ion-icon name="trash"></ion-icon>Eliminar
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-fab right bottom #fab>
+    <button ion-fab color="botonflotante">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+    <ion-fab-list  side="top">
+      <button ion-fab  (click) = "agregar(fab);">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+  </ion-footer>
+
